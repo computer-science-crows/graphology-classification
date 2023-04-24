@@ -52,7 +52,21 @@ def generate_excel(urls, rute):
 
 urls = ['https://bigfive-test.com/result/64278a5b2da61900099f4840',
         'https://bigfive-test.com/result/642626e77033800008bde884',
-        'https://bigfive-test.com/result/6424eb5bfa524d0008d3bbcf']
+        'https://bigfive-test.com/result/6424eb5bfa524d0008d3bbcf',
+        'https://bigfive-test.com/result/6431f77e0e940e000826b0db',
+        'https://bigfive-test.com/result/64336f260fdce60008273ed1',
+        'https://bigfive-test.com/result/643374360fdce60008273ef7',
+        'https://bigfive-test.com/result/6432d6b97ea5290008b61884',
+        'https://bigfive-test.com/result/6431ffaa0e940e000826b0ff',
+        'https://bigfive-test.com/result/6432e128efefc00008516e69',
+        'https://bigfive-test.com/result/643372b70fdce60008273ee7',
+        'https://bigfive-test.com/result/643373460fdce60008273eec',
+        'https://bigfive-test.com/result/644894888fc17a0008362da4',
+        'https://bigfive-test.com/result/64485252c559a20008972973',
+        'https://bigfive-test.com/result/64485939c559a2000897299b',
+        'https://bigfive-test.com/result/58a70606a835c400c8b38e84',
+        'https://bigfive-test.com/result/64489f12aae96d000880dcda',
+        'https://bigfive-test.com/result/644894888fc17a0008362da4']
 
 rute = 'D:/UniVerSiDaD/IV Ano/Machine Learning/Project/Dataset/big_five.xlsx'
 
