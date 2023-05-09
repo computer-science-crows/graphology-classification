@@ -52,21 +52,21 @@ def generate_excel(urls, rute):
     xlsx.close()
 
 #Alejandra
-urls = [
-        'https://bigfive-test.com/result/6431f77e0e940e000826b0db',
-        'https://bigfive-test.com/result/64336f260fdce60008273ed1',
-        'https://bigfive-test.com/result/643374360fdce60008273ef7',
-        'https://bigfive-test.com/result/6432d6b97ea5290008b61884',
-        'https://bigfive-test.com/result/6431ffaa0e940e000826b0ff',
-        'https://bigfive-test.com/result/6432e128efefc00008516e69',
-        'https://bigfive-test.com/result/643372b70fdce60008273ee7',
-        'https://bigfive-test.com/result/643373460fdce60008273eec',
-        'https://bigfive-test.com/result/644894888fc17a0008362da4',
-        'https://bigfive-test.com/result/64485252c559a20008972973',
-        'https://bigfive-test.com/result/64485939c559a2000897299b',
-        'https://bigfive-test.com/result/58a70606a835c400c8b38e84',
-        'https://bigfive-test.com/result/64489f12aae96d000880dcda',
-        'https://bigfive-test.com/result/644894888fc17a0008362da4']
+# urls = [
+#         'https://bigfive-test.com/result/6431f77e0e940e000826b0db',
+#         'https://bigfive-test.com/result/64336f260fdce60008273ed1',
+#         'https://bigfive-test.com/result/643374360fdce60008273ef7',
+#         'https://bigfive-test.com/result/6432d6b97ea5290008b61884',
+#         'https://bigfive-test.com/result/6431ffaa0e940e000826b0ff',
+#         'https://bigfive-test.com/result/6432e128efefc00008516e69',
+#         'https://bigfive-test.com/result/643372b70fdce60008273ee7',
+#         'https://bigfive-test.com/result/643373460fdce60008273eec',
+#         'https://bigfive-test.com/result/644894888fc17a0008362da4',
+#         'https://bigfive-test.com/result/64485252c559a20008972973',
+#         'https://bigfive-test.com/result/64485939c559a2000897299b',
+#         'https://bigfive-test.com/result/58a70606a835c400c8b38e84',
+#         'https://bigfive-test.com/result/64489f12aae96d000880dcda',
+#         'https://bigfive-test.com/result/644894888fc17a0008362da4']
 
 #Kevin
 # urls = ['https://bigfive-test.com/result/64278a5b2da61900099f4840',
@@ -87,6 +87,71 @@ urls = [
 #         'https://bigfive-test.com/result/64236db66b9c700008b6acf8',
 #         'https://bigfive-test.com/result/642367da6b9c700008b6acc7'    
 # ]
+
+#Sheyla
+# urls = [
+#     'https://bigfive-test.com/result/6434ee227c084c000804aa05',
+#     'https://bigfive-test.com/result/6434ecff7c084c000804a9fb',
+#     'https://bigfive-test.com/result/6434e8317c084c000804a9e0',
+#     'https://bigfive-test.com/result/6434e4617c084c000804a9d1',
+#     'https://bigfive-test.com/result/643351612e5b2b000885cd7f',
+#     'https://bigfive-test.com/result/643353b32e5b2b000885cd89',
+#     'https://bigfive-test.com/result/64343b230496010008ba103e',
+#     'https://bigfive-test.com/result/64337f7aad1f540008772fba',
+#     'https://bigfive-test.com/result/643375bd0fdce60008273f07',
+#     'https://bigfive-test.com/result/64337af6ad1f540008772f9c',
+#     'https://bigfive-test.com/result/6434d9f17c084c000804a997',
+#     'https://bigfive-test.com/result/6433154241173d0008ad56ad',
+#     'https://bigfive-test.com/result/643434c00496010008ba0fec',
+#     'https://bigfive-test.com/result/6430d48ca9ac510008deb955',
+#     'https://bigfive-test.com/result/6430d14ba9ac510008deb942',
+#     'https://bigfive-test.com/result/643346b52e5b2b000885cd32',
+#     'https://bigfive-test.com/result/64334a472e5b2b000885cd46',
+#     'https://bigfive-test.com/result/64333db12e5b2b000885cce5',
+#     'https://bigfive-test.com/result/6433311841173d0008ad57a8',
+#     'https://bigfive-test.com/result/58a70606a835c400c8b38e84',
+# ]
+
+#Andry
+# urls=[
+#     'https://bigfive-test.com/result/6424d7b2c337f600084a65a3',
+#     'https://bigfive-test.com/result/6425f8fc29c6ed00080a263b',
+#     'https://bigfive-test.com/result/6425f8d829c6ed00080a2638',
+#     'https://bigfive-test.com/result/642601c6b6bf1a0008a91f50',
+#     'https://bigfive-test.com/result/64285dc27fba2c00087b6f48',
+#     'https://bigfive-test.com/result/642b070a1e72b800082a7eb0',
+#     'https://bigfive-test.com/result/642b8c9e027f4a000809e626',
+#     'https://bigfive-test.com/result/642b93bc027f4a000809e665',
+#     'https://bigfive-test.com/result/642b9345027f4a000809e662',
+#     'https://bigfive-test.com/result/642b74ef64d75f0008b12181',
+#     'https://bigfive-test.com/result/642c39b0f5888700088a9d23',
+#     'https://bigfive-test.com/result/642c341df5888700088a9cdb',
+#     'https://bigfive-test.com/result/642da34b44d5540008389d4c',
+#     'https://bigfive-test.com/result/642da16544d5540008389d38',
+#     'https://bigfive-test.com/es/result/642db56e277d8e0008418a8a',
+#     'https://bigfive-test.com/result/642dd37e086ba300097ba388',
+#     'https://bigfive-test.com/result/642dd2bd086ba300097ba378',
+#     'https://bigfive-test.com/result/642dd50c086ba300097ba398',
+#     'https://bigfive-test.com/result/642ddc5b086ba300097ba415',
+#     'https://bigfive-test.com/result/642dd7ea086ba300097ba3c5',
+#     'https://bigfive-test.com/result/642de049ca4b7b0008313f36',
+#     'https://bigfive-test.com/result/642ddef9086ba300097ba449',
+#     'https://bigfive-test.com/result/642ddc2d086ba300097ba40f',
+#     'https://bigfive-test.com/result/642ddd3c086ba300097ba41f',
+#     'https://bigfive-test.com/result/642de392ca4b7b0008313fe1',
+#     'https://bigfive-test.com/result/642dd9d8086ba300097ba3e6',
+#     'https://bigfive-test.com/result/642de4c3ca4b7b0008313ff4',
+#     'https://bigfive-test.com/result/64303327b53c6e00088a2ed0',
+#     'https://bigfive-test.com/result/6431e0933a9f0f0008c6ef9e',
+#     'https://bigfive-test.com/result/642b8770027f4a000809e5f9',
+#     'https://bigfive-test.com/result/6434966152b6430008423da1'
+# ]
+
+#Javier
+urls=[
+    'http://bigfive-test.com/result/6431eb6d3a9f0f0008c6eff8',
+    'http://bigfive-test.com/result/643466ad56c44c00089edaa5'
+]
 
 rute = 'D:/UniVerSiDaD/IV Ano/Machine Learning/Project/Graphology classification/graphology-classification/Dataset/big_five.xlsx'
 
