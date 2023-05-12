@@ -88,19 +88,19 @@ def generate_excel(urls, rute):
 # ]
 
 #Sheyla
-urls = [
-    'https://bigfive-test.com/result/64343b230496010008ba103e',
-    'https://bigfive-test.com/result/643346b52e5b2b000885cd32',
-    'https://bigfive-test.com/result/64337af6ad1f540008772f9c',
-    'https://bigfive-test.com/result/58a70606a835c400c8b38e84',
-    'https://bigfive-test.com/result/6434d9f17c084c000804a997',
-    'https://bigfive-test.com/result/6433311841173d0008ad57a8',
-    'https://bigfive-test.com/result/6434e4617c084c000804a9d1',
-    'https://bigfive-test.com/result/643434c00496010008ba0fec',
-    'https://bigfive-test.com/result/6434ecff7c084c000804a9fb',
-    'https://bigfive-test.com/result/64337f7aad1f540008772fba',
+# urls = [
+#     'https://bigfive-test.com/result/64343b230496010008ba103e',
+#     'https://bigfive-test.com/result/643346b52e5b2b000885cd32',
+#     'https://bigfive-test.com/result/64337af6ad1f540008772f9c',
+#     'https://bigfive-test.com/result/58a70606a835c400c8b38e84',
+#     'https://bigfive-test.com/result/6434d9f17c084c000804a997',
+#     'https://bigfive-test.com/result/6433311841173d0008ad57a8',
+#     'https://bigfive-test.com/result/6434e4617c084c000804a9d1',
+#     'https://bigfive-test.com/result/643434c00496010008ba0fec',
+#     'https://bigfive-test.com/result/6434ecff7c084c000804a9fb',
+#     'https://bigfive-test.com/result/64337f7aad1f540008772fba',
 
-]
+# ]
 
 #Andry
 # urls=[
@@ -131,25 +131,21 @@ urls = [
 # ]
 
 #Javier
-#urls=[
-#    'http://bigfive-test.com/result/6431eb6d3a9f0f0008c6eff8',
-#    'http://bigfive-test.com/result/643466ad56c44c00089edaa5'
-#]
+# urls=[
+#     'http://bigfive-test.com/result/6431eb6d3a9f0f0008c6eff8',
+#     'http://bigfive-test.com/result/643466ad56c44c00089edaa5'
+# ]
 
 #Laura
-# urls=[
-#     'https://bigfive-test.com/result/645b8925811958000860839c',
-#     'https://bigfive-test.com/result/64340093a485d0008c47b52',
-#     'https://bigfive-test.com/result/6428c5867fde0a00085748b1',
-#     'https://bigfive-test.com/result/642f4a9b9dad980008a236a2',
-#     'https://bigfive-test.com/result/64244df8ff75de00080523bc',
-#     'https://bigfive-test.com/result/642a459ef52da200083e8855',
-#     'https://bigfive-test.com/result/6434966152b6430008423da1',
-#     'https://bigfive-test.com/result/64244d58ff75de00080523b3',
-#     'https://bigfive-test.com/result/6424dd95c337f600084a65c0',
-#     'https://bigfive-test.com/result/6423a18db4caeb00086c07d4',
-#     'https://bigfive-test.com/result/6431d5993a9f0f0008c6ef42',
-# ]
+urls=[
+    'https://bigfive-test.com/result/6423a18db4caeb00086c07d4',
+    'https://bigfive-test.com/result/64244df8ff75de00080523bc',
+    'https://bigfive-test.com/result/6424dd95c337f600084a65c0',
+    'https://bigfive-test.com/result/645b8925811958000860839c',
+    'https://bigfive-test.com/result/6431d5993a9f0f0008c6ef42',
+    'https://bigfive-test.com/result/64244d58ff75de00080523b3',
+    'https://bigfive-test.com/result/642f4a9b9dad980008a236a2'
+]
 
 rute = 'big_five_ok.xlsx'
 
