@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 
 /Segmentation/photo-cropped
+/Images
+/Image_Matrix/Img_npy
