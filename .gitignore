@@ -131,3 +131,8 @@ dmypy.json
 /Segmentation/photo-cropped
 /Images
 /Image_Matrix/Img_npy
+
+*.pdf 
+*.aux
+*.log
+*.fdb_latexmk
