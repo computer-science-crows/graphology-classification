@@ -6,7 +6,7 @@ import scipy.signal as scy
 
 # files_names = os.listdir("./photo-scanner/Laura")
 
-img = cv2.imread(f"C:/Users/User/Desktop/Ciber/MATCOM/Cuarto/ML/graphology-classification/Features/LineSpace/Aida.jpg")
+img = cv2.imread(f"C:/Users/User/Desktop/Ciber/MATCOM/Cuarto/ML/graphology-classification/Features/LineSpace/Aida_0.jpg")
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 img = cv2.GaussianBlur(img, (5,5),0)
@@ -51,8 +51,8 @@ def gap_text_clasifier(img,delta):
             
             Spr = SPR(img[0:img.shape[0],i*proportion:min(i*proportion + proportion, img.shape[1])])
             
-            peaks_max = scy.find_peaks(Spr)
-            peaks_min = scy.find_peaks(-Spr)
+            peaks_max = scy.find_peaks(Spr, distance = 10)
+            peaks_min = scy.find_peaks(-Spr, distance = 10)
             peaks = np.concatenate((peaks_max[0],peaks_min[0]))
             peaks.sort(kind="mergesort")
             
