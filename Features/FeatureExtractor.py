@@ -24,3 +24,5 @@ class FeaturesInfo():
         img = cv2.GaussianBlur(img, (5,5),0)
         img1, img2 = FeaturesInfo.thresholding(img)
         return img1, img2
+
+
