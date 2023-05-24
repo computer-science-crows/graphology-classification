@@ -134,3 +134,8 @@ dmypy.json
 Features/LineSpace/Aida.jpg
 Features/LineSpace/Aidax.jpg
 Features/LineSpace/Aida_0.jpg
+Features/letterSize.py
+Features/Baseline/Judith_21.jpg
+.gitignore
+Features/WordSpace/Aida_0.jpg
+Features/Margin/Aida_0.jpg
