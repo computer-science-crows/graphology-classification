@@ -3,6 +3,7 @@ import numpy as np
 import os
 import matplotlib as plt
 import scipy.signal as scy
+import math
 
 LINESPACE_SEPARETED = 0
 LINESPACE_CROWDED = 1
@@ -15,13 +16,16 @@ def margin_text(img):
     proportion = int((img.shape[1])/20)
     d = [0] * (img.shape[1]//proportion +1)
     for i in range(len(d)):
-        d[i] = np.sum(img[0:img.shape[0],i*proportion:min(i*proportion + proportion, img.shape[1])])/ ((min(i*proportion + proportion, img.shape[1]) - i*proportion)* img.shape[0])
-             
+        val = np.sum(img[0:img.shape[0],i*proportion:min(i*proportion + proportion, img.shape[1])])/ ((min(i*proportion + proportion, img.shape[1]) - i*proportion)* img.shape[0])
+        if not math.isnan(val):
+            d[i] = val 
+
     delta = [0] * len(d)
     th =  np.median(d)/2
     for i in range(len(d)):
-        delta[i] = int((1+ np.sign(d[i] - th))//2)
- 
+            delta[i] = int((1+ np.sign(d[i] - th))//2)
+
+
     return delta, proportion
 
 def SPR(img):
@@ -49,7 +53,7 @@ def LineSpaceFeature(img):
             peaks = np.concatenate((peaks_max,peaks_min))
             peaks.sort(kind="mergesort")
             
-            plt.pyplot.imshow(sub_img, cmap="binary")
+            #plt.pyplot.imshow(sub_img, cmap="binary")
             
             #TODO en dependencia de la cantidad de pikes si 1 espaciado amplo, si 2 calcular densidad de extremos, si >2 descartar
             #TODO asignrle a la imagen el promedio
@@ -61,9 +65,9 @@ def LineSpaceFeature(img):
                 width += np.sum(sub_img[0:peaks[0],0:sub_img.shape[1]]) + np.sum(sub_img[0:peaks[1],0:sub_img.shape[1]]) <= (sub_img.shape[0] * sub_img.shape[1])/5
                 total +=1 
 
-            plt.pyplot.plot(Spr[0:len(Spr)], range(0,sub_img.shape[0]), color='red')
-            plt.pyplot.scatter([Spr[i] for i in peaks], peaks,[20]*len(peaks))
-            plt.pyplot.show()
+            # plt.pyplot.plot(Spr[0:len(Spr)], range(0,sub_img.shape[0]), color='red')
+            # plt.pyplot.scatter([Spr[i] for i in peaks], peaks,[20]*len(peaks))
+            # plt.pyplot.show()
     
     if width/(total) < 0.7:
         return LINESPACE_CROWDED
