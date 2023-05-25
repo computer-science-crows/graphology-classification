@@ -34,7 +34,7 @@ def determine_slant(image_path):
             max_sum = hist_sum
             best_angle = angle
     
-    #print(best_angle)
+    print(best_angle)
 
     # Classify slant based on best angle
     if best_angle > -2 and best_angle < 2:
@@ -48,14 +48,16 @@ def determine_slant(image_path):
     else:
         return "Extreme left slant"
 
-r_3 = determine_slant("photo-scanner/Alejandra/Emir Sierra (3).jpg")
+#r_3 = determine_slant("photo-scanner/Alejandra/Emir Sierra (3).jpg")
 r_4 = determine_slant("test/lh.jpg")
 r_5 = determine_slant("test/rh.jpeg")
 r_6 = determine_slant("test/rr.jpeg")
-r_7 = determine_slant("test/cs.jpg")
+r_7 = determine_slant("test_slant/look.png")
+r_8 = determine_slant("test_slant/45.png")
 
-print(r_3)
+#print(r_3)
+print(r_7)
 print(r_4)
 print(r_5)
 print(r_6)
-print(r_7)
+print(r_8)
