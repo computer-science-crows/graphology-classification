@@ -1,8 +1,6 @@
 import cv2
 import numpy as np
 
-# Algorithm from Predicting the Big Five personality traits from handwriting, Mihai Gavrilescu and Nicolae Vizireanu
-
 EXTREME_LEFT = -2
 MODERATE_LEFT = -1
 VERTICAL = 0
