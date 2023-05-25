@@ -17,8 +17,8 @@ def BaselineFeature(img):
     img[img == 255] = 0
 
     center = img.shape[0]//2 
-    top = center - min(10, img.shape[0] - center)
-    bottom = center + min(10, img.shape[0] - center)
+    top = center - img.shape[0]//5
+    bottom = center + img.shape[0]//5
 
     best = 0 
     angle = 0
@@ -31,8 +31,8 @@ def BaselineFeature(img):
             plt.pyplot.imshow(imgx, cmap="binary")
     
     if angle < -5:
-        return ASCENDING 
+        return ASCENDING, angle
     elif angle > 5:
-        return DESCENDING
-    return LEVELED
+        return DESCENDING, angle
+    return LEVELED, angle
 
