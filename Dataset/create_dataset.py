@@ -2,6 +2,16 @@ import os
 import numpy as np
 import pandas as pd
 
+import sys
+sys.path.append('./Features')
+
+from FeatureExtractor import FeaturesInfo
+
+class data:
+    def __init__(self, matrix, big_five, features = None) -> None:
+        self.matrix = matrix
+        self.big_five = big_five
+        self.features = features
 
 def get_xslx():
     cwd = os.getcwd()
@@ -42,17 +52,25 @@ def get_images():
 
     return npys
 
-
 def build_dataset():
     xlsx = get_xslx()
     npys = get_images()
     dataset = []
 
+    #np.save('Dataset/error', npys[0][1])
+    
     for i in range(len(xlsx)):
         for j in npys[i]:
-            dataset.append((j, xlsx.values[i]))
-
+            #dataset.append((j, xlsx.values[i]))
+            #feats = get_features(j)
+            print(len(dataset))
+            a = FeaturesInfo(j)
+            dataset.append(data(j, xlsx.values[i], a))
     return dataset
 
-
-dataset = build_dataset()
+def main():
+    dataset = build_dataset()
+    arr = np.asanyarray(dataset, dtype=object)
+    np.save('Dataset/dataset_feat', arr)
+    
+main()
