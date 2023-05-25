@@ -136,3 +136,9 @@ dmypy.json
 *.aux
 *.log
 *.fdb_latexmk
+Report/Report.bbl
+.gitignore
+Report/Report.blg
+Report/Report.out
+Report/Report.synctex.gz
+Features/letterSize.py

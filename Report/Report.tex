@@ -90,7 +90,7 @@ Debido a la dificultad de descargar un dataset y la poca informaci\'on que ofrec
 \section{Creaci\'on de la Base de Datos}
 
 La propuesta es crear nuestro propio dataset, para ello fueron encuestadas 93 personas, a las que se les pidi\'on que escribiesen un texto 
-en espa\~nol y se les realiz\'o el test de personalidad BigFive. \\ 
+en espa\~nol y se les realiz\'o el test de personalidad BigFive \cite{23}. \\ 
 
 Las hojas manuscritas fueron escaneadas y a las im\'agenes se les aplic\'o un preprocesado para llevarlas escala de grises y finalmente a binario con un nivel de tolerancia de 180. Adem\'as se 
 realiz\'o una segmentaci\'on de los textos en l\'ineas a partir de una difusi\'on de los caracteres utilizando \texttt{opencv} de python. Las secciones de imagen que no quedaran 
@@ -99,8 +99,67 @@ del todo segmentadas producto a escrituras muy unidas fueron segmentadas manualm
 A los test de personalidad se les extrajo autom\'aticamente la informaci\'on referida a los porcentajes de cada uno 
 de los 5 rasgos distintivos del Big Five, para esto se emple\'o un c\'odigo de python que scrapea las p\'aginas web de los resultados del test.\\ 
 
+\section{Extracci\'on de Features}
+Para extraer los features de las im\'agenes del DataSer se utilizaron algoritmos de procesamiento de im\'agenes. Previamente las im\'agenes se les realiz\'o un 
+preprocesado para eliminar ruidos y llevarlas a binario; los features extra\'idos son: Interlineado (LineSpace), Espaciado (WordSpace), Margen (Margin), Inclionaci\'on de la l\'inea (Baseline). 
+
+\subsection{Interlineado} 
+
+Para el interlineado se analizan dos clasificaciones posibles: Interlineado amplio (LINESPACE\_SEPARETED) e Interlineado peque\~no (LINESPACE\_CROWDED). Para encontrar el interlineado se utiliz\'o la t\'ecnica del perfil 
+de proyeci\'on vertical suavizado(SPR) \cite{20}, esto permite separar las zonas de texto y espacios analizando los extremos del SPR, para las im\'agenes segmentadas es simple con este algoritmo determinar donde est\'a el texto correspondiente a la l\'inea y los espcaios superior e inferior
+correspondientes al interlineado, as\'i se puede determinar si una l\'inea est\'a muy unida a sus adyacentes considerando la proporci\'on de p\'ixeles de foreground (pixeles negros correspondientes a texto) que existen en 
+las regiones identificadas como espacio.
+
+Para analizar los SPR se separa la imagen en regiones vertiales de tema\~no 5\% del ancho de la imagen, se hace el SPR de cada uno, se determonan las regiones de texto y espacio \cite{22} y se calcula la densidad 
+de p\'ixeles de foreground en los espacios . Finalmente se promedian los resultados de densidades para cada secci\'on vertical para determira si la l\'inea est\'a muy separada o muy pegada a sus adyacentes. 
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width = 0.5\linewidth]{Figure_1.png}
+    \caption{Segmento vertical de 5\% de imagen, en rojo el SPR y en azul los extremos del SPR, en el intermedio est\'a la zona de texto y en los bordes la zona de interlineado.}
+\end{figure}
+\subsection{Margen} 
+
+Para determinar el margen se pueden considerar tanto los m\'argenes superior e inferior como los m\'argenes laterales \cite{21}, para nuestro Dataset, como las im\'agenes son l\'ineas manuscritas no tiene sentido analizar los m\'argenes superior e inferior, por tanto solo 
+se clasifica el margen lateral izquierdo en cuanto a su ancho como: Margen ancho (BIG\_MARGIN) y margen estrecho (SMALL\_MARGIN). Para esto se analiz\'o el perfil de proyeccci\'on (PR) horizontal de cada im\'agen tomando el rango del PR desde el elemento 0 hasta que el valor del PR 
+sea mayo que una tolerancia espec\'ificada, es decir mientras que la densidad de p\'ixeles en el foreground para cada columna de la imagen sea menor que un valor relativo al largo de la iamgen. 
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width = 0.5\linewidth]{Margin.png}
+    \caption{Desde el inicio hasta la l\'inea roja la secci\'on de margen.}
+\end{figure}
+\subsection{Espaciado} 
+
+El espaciado so los espacios dejados entre caracteres y palabras en una misma l\'inea, para clasificar el espaciado se realiz\'o a cada im\'agen un trabajo con filtros morfol\'ogicos, seleccionando un kernel horizontal para realizar una convoluci\'on con la imagen 
+que permita unificar los trazos de todo lo que est\'e escrito unido de una misma palabra para de este modo separar las palabras enmarc\'andolas en recuadros, as\'i el espaciado se puede determinar como la distancia promedio entre los recuadros.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width = 0.5\linewidth]{Espaces.png}
+    \caption{Recuedros que bordean al texto escrito sin espacios.}
+\end{figure}
+
+\subsection{Inclinaci\'on de la L\'inea}
+Para determinar la inclinaci\'on de la letra en una l\'inea se realiz\'o el procedimiento descrito en \cite{20}, rotando la im\'agen desde $-30^{\circ}$ hasta $30^{\circ}$, 
+determinando para cu\'al de los valores de la rotaci\'on la cantidad de p\'ixeles de foreground es m\'axima para la zona central de la imagen. Para los \'angulos comprendidos 
+entre $ [-30; -5) $ se dice que la linea base es Ascendente (ASCENDING), entre $[-5; 5]$ es Nivelada (LEVELED) y entre $(5; 30]$ es Descendente (DESCENDING). 
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width = 0.4\linewidth]{Judith_21.jpg}
+    \includegraphics[width = 0.4\linewidth]{Baseline.png}
+    \caption{a) texto original b) Texto con una inclinaci\'on de $-6^{\circ}$, la zona enmarcada en rojo es el \'area en que se busca maximizar 
+    la cantidad de pixeles de foreground.}
+\end{figure}
+
+\subsection{Inclinaci\'on de la letra}
 
 \section{Algoritmos Utilizados}
+\subsection{KNN}
+\subsection{CNN}
+\subsection{K-Means}
+\subsection{SVM}
 \section{Resultados}
 
 \begin{thebibliography}{99}
@@ -142,6 +201,14 @@ de los 5 rasgos distintivos del Big Five, para esto se emple\'o un c\'odigo de p
         \bibitem{18} \emph{Handwriting Personality Recognition with Machine  Learning: A Comparative Study}
 
         \bibitem{19} \emph{GRAPHOLOGY: UNDERSTANDING – MISUNDERSTANDING.}
-    %-----------------------------------------------------------------------------------
+
+        \bibitem{20} \emph{Predicting the Big Five personality traits from handwriting } 2018
+
+        \bibitem{21} \emph{A Machine Learning Approach to Employability Evaluation Using Handwriting Analysis}
+
+        \bibitem{22} \emph{Handwritten document image segmentation into text lines and words} 2010
+        
+        \bibitem{23} \url{https://bigfive-test.com}
+        %-----------------------------------------------------------------------------------
     \end{thebibliography}
 \end{document}
