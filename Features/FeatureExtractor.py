@@ -1,15 +1,24 @@
-from .Baseline import Baseline
-from .LineSpace import LineSpace
-from .WordSpace import WordSpace
-from .Margin import Margin
+try:
+    from Baseline import Baseline
+    from LineSpace import LineSpace
+    from WordSpace import WordSpace
+    from Margin import Margin
+except: 
+    from Features.Baseline import Baseline    
+    from Features.LineSpace import LineSpace
+    from Features.WordSpace import WordSpace
+    from Features.Margin import Margin
+import cv2
 
 class FeaturesInfo():
     def __init__(self, image):
         img1, img2 = FeaturesInfo.preprocessing(image)
         self.image = img1 
-        self.baseline = Baseline.BaselineFeature(img2)
-        self.word_space = WordSpace.WordSpaceFeature(img1) 
-        self.line_space = LineSpace.LineSpaceFeature(img2)
+        self.baseline, angle = Baseline.BaselineFeature(img2)
+        imgbl = Baseline.rotate(img1, angle)
+        self.word_space = WordSpace.WordSpaceFeature(imgbl)
+        imgbl2 = Baseline.rotate(img2, angle) 
+        self.line_space = LineSpace.LineSpaceFeature(imgbl2)
         self.margin = Margin.MarginFeature(img2)
 
     
@@ -25,4 +34,6 @@ class FeaturesInfo():
         img1, img2 = FeaturesInfo.thresholding(img)
         return img1, img2
 
+img = cv2.imread("C:/Users/User/Desktop/Ciber/MATCOM/Cuarto/ML/graphology-classification/Features/Aida_21.jpg")
+FeaturesInfo(img)
 

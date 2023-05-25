@@ -8,8 +8,9 @@ LINESPACE_SEPARETED = 0
 LINESPACE_CROWDED = 1
 
 def margin_text(img):
-    img[img == 0] = 1
-    img[img == 255] = 0
+    # img[img==1] = 255
+    # img[img == 0] = 1
+    # img[img == 255] = 0
 
     proportion = int((img.shape[1])/20)
     d = [0] * (img.shape[1]//proportion +1)
@@ -48,7 +49,7 @@ def LineSpaceFeature(img):
             peaks = np.concatenate((peaks_max,peaks_min))
             peaks.sort(kind="mergesort")
             
-            # plt.pyplot.imshow(sub_img, cmap="binary")
+            plt.pyplot.imshow(sub_img, cmap="binary")
             
             #TODO en dependencia de la cantidad de pikes si 1 espaciado amplo, si 2 calcular densidad de extremos, si >2 descartar
             #TODO asignrle a la imagen el promedio
@@ -59,9 +60,11 @@ def LineSpaceFeature(img):
             elif len(peaks) == 2: 
                 width += np.sum(sub_img[0:peaks[0],0:sub_img.shape[1]]) + np.sum(sub_img[0:peaks[1],0:sub_img.shape[1]]) <= (sub_img.shape[0] * sub_img.shape[1])/5
                 total +=1 
-            # plt.pyplot.plot(Spr[1:len(Spr)-1], range(0,img.shape[0]), color='red')
-            # plt.pyplot.scatter([Spr[i] for i in peaks], peaks,[20]*len(peaks))
-            # plt.pyplot.show()
-    if width/(total+1) >=0.5:
-        return LINESPACE_SEPARETED
-    return LINESPACE_CROWDED
+
+            plt.pyplot.plot(Spr[0:len(Spr)], range(0,sub_img.shape[0]), color='red')
+            plt.pyplot.scatter([Spr[i] for i in peaks], peaks,[20]*len(peaks))
+            plt.pyplot.show()
+    
+    if width/(total) < 0.7:
+        return LINESPACE_CROWDED
+    return LINESPACE_SEPARETED
