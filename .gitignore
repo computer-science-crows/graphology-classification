@@ -132,6 +132,7 @@ dmypy.json
 /Images
 /Image_Matrix/Img_npy
 
+
 *.pdf 
 *.aux
 *.log
@@ -142,3 +143,29 @@ Report/Report.blg
 Report/Report.out
 Report/Report.synctex.gz
 Features/letterSize.py
+
+
+Features/Margin/Aida_0.jpg
+Features/Aida_21.jpg
+.gitignore
+Report/Report.aux
+.gitignore
+Report/Report.fdb_latexmk
+.gitignore
+.gitignore
+.gitignore
+Features/Judith_21.jpg
+Report/Report.bbl
+Report/Report.blg
+Report/Report.fdb_latexmk
+Report/Report.fdb_latexmk
+Report/Report.out
+Report/Report.pdf
+Report/Report.fdb_latexmk
+Report/Report.fdb_latexmk
+Report/Report.fdb_latexmk
+Report/Report.synctex.gz
+Report/Report.fdb_latexmk
+Report/Report.fdb_latexmk
+Report/Report.fdb_latexmk
+
