@@ -3,11 +3,13 @@ try:
     from LineSpace import LineSpace
     from WordSpace import WordSpace
     from Margin import Margin
+    from Slant import Slant
 except: 
     from Features.Baseline import Baseline    
     from Features.LineSpace import LineSpace
     from Features.WordSpace import WordSpace
     from Features.Margin import Margin
+    from Features.Slant import Slant
 import cv2
 
 class FeaturesInfo():
@@ -19,7 +21,8 @@ class FeaturesInfo():
         self.word_space = WordSpace.WordSpaceFeature(imgbl)
         imgbl2 = Baseline.rotate(img2, angle) 
         self.line_space = LineSpace.LineSpaceFeature(imgbl2)
-        self.margin = Margin.MarginFeature(img2)
+        self.margin = Margin.MarginFeature(imgbl2)
+        self.slant = Slant.SlantFeature(img)
 
     
     def thresholding(img):
@@ -34,6 +37,6 @@ class FeaturesInfo():
         img1, img2 = FeaturesInfo.thresholding(img)
         return img1, img2
 
-img = cv2.imread("C:/Users/User/Desktop/Ciber/MATCOM/Cuarto/ML/graphology-classification/Features/Aida_21.jpg")
+img = cv2.imread("C:/Users/User/Desktop/Ciber/MATCOM/Cuarto/ML/graphology-classification/Features/Aida_2.jpg")
 FeaturesInfo(img)
 
