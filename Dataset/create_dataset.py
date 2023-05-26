@@ -16,14 +16,10 @@ class data:
 def get_xslx():
     cwd = os.getcwd()
     return pd.read_excel(cwd+'/Scrapper/big_five.xlsx')
-    # return pd.read_excel('D:/UniVerSiDaD/IV Ano/Machine Learning/Project/Graphology classification/graphology-classification/Scrapper/big_five.xlsx')
-
 
 def get_images():
     cwd = os.getcwd()
     path = cwd+'/Image_Matrix/Img_npy'
-
-    # path = 'D:/UniVerSiDaD/IV Ano/Machine Learning/Project/Graphology classification/graphology-classification/Image_Matrix/Img_npy'
 
     folders_names = os.listdir(path)
 
@@ -56,16 +52,11 @@ def build_dataset():
     xlsx = get_xslx()
     npys = get_images()
     dataset = []
-
-    #np.save('Dataset/error', npys[0][1])
     
     for i in range(len(xlsx)):
         for j in npys[i]:
-            #dataset.append((j, xlsx.values[i]))
-            #feats = get_features(j)
             print(len(dataset))
-            a = FeaturesInfo(j)
-            dataset.append(data(j, xlsx.values[i], a))
+            dataset.append(data(j, xlsx.values[i], FeaturesInfo(j)))
     return dataset
 
 def main():
@@ -73,4 +64,4 @@ def main():
     arr = np.asanyarray(dataset, dtype=object)
     np.save('Dataset/dataset_feat', arr)
     
-main()
+#main()
