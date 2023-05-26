@@ -4,7 +4,6 @@ from prettytable import PrettyTable
 PATH_TEST = "tests" #personality tests root folder
 PATH_IMG= "images" #images root folder
 
-
 class Data():
     """
     Data is a type that reference a handwriting image and the associated test
@@ -57,7 +56,8 @@ def generate_path(folder_path):
                 files_path.append(full_path)
 
     return files_path
-          
+
+
 def main():
     # Generate list of img and test files
     tests = generate_path(PATH_TEST)
@@ -78,6 +78,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
 

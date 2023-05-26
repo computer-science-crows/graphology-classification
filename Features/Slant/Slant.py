@@ -53,4 +53,3 @@ def SlantFeature(img):
     else:
         return EXTREME_LEFT
 
-
