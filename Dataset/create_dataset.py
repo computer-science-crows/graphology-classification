@@ -67,5 +67,4 @@ def main():
     dataset = build_dataset()
     arr = np.asanyarray(dataset, dtype=object)
     np.save('Dataset/dataset_feat', arr)
-
 # main()
