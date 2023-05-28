@@ -8,14 +8,16 @@ sys.path.append('./Features')
 from FeatureExtractor import FeaturesInfo
 
 class data:
-    def __init__(self, matrix, big_five, features = None) -> None:
+    def __init__(self, matrix, big_five, features=None) -> None:
         self.matrix = matrix
         self.big_five = big_five
         self.features = features
 
+
 def get_xslx():
     cwd = os.getcwd()
     return pd.read_excel(cwd+'/Scrapper/big_five.xlsx')
+
 
 def get_images():
     cwd = os.getcwd()
@@ -48,20 +50,22 @@ def get_images():
 
     return npys
 
+
 def build_dataset():
     xlsx = get_xslx()
     npys = get_images()
     dataset = []
-    
+
     for i in range(len(xlsx)):
         for j in npys[i]:
             print(len(dataset))
             dataset.append(data(j, xlsx.values[i], FeaturesInfo(j)))
     return dataset
 
+
 def main():
     dataset = build_dataset()
     arr = np.asanyarray(dataset, dtype=object)
     np.save('Dataset/dataset_feat', arr)
-    
-main()
+
+# main()
