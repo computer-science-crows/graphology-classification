@@ -158,12 +158,46 @@
             izquierda (MODERATE\_LEFT), as\'i como sus equivalentes hacia la derecha (EXTREME\_RIGHT) y (MODERATE\_RIGHT) respectivamente y la escritura sin inclinaciones (VERTICAL). 
             Para extraer este feature se utiliza el perfil de proyecci\'on (PR) vertical rotando la imagen en \'angulos entre $-20^{\circ}$ y $20^{\circ}$, buscando el \'angulo que maximice
             la suma del PR normalizado, tal y como se plantea en \cite{20}.
-\section{Algoritmos Utilizados}
-\subsection{KNN}
-\subsection{CNN}
-\subsection{K-Means}
-\subsection{SVM}
-\section{Resultados}
+
+    \section{Algoritmos Utilizados}
+        Para la investigsci\'on sobre Grafolog\'ia con ML se utilizaron a modo comparativo los algoritmos m\'as citados en el Estado del Arte de este tema. 
+        Para probar cada uno de ellos se dividi\'o el dataset en 3 conjuntos: Entrenamiento, Test y Validaci\'on con tama\~no $50\%$, $25\%$ y $25\%$ de las personas que conforman el dataset respectivamente.
+        Primero se seleccion\'o el conjunto de personas para hacer la validaci\'on y se separaron las im\'agenes de sus escritures, features extra\'idos y resultados del test BigFive. Luego a los restantes datos del dataset 
+        se les aplic\'o k-fold para dividir los datos de tests y entrenamiento.  
+        \subsection{KNN}
+            Para el algoritmo de KNN se utilizaron los features extra\'idos de las im\'agenes y los resultados del big five para entrenar un modelo \texttt{KNeighborsClassifier} del m\'odulo sklearn de pyrhon. 
+            Previo al entrenamiento se reescalaron los datos de la entrada utilizando \texttt{StandardScaler}. El valor de k fijado como cantidad de vecinos cercanos a fijar, fue el m\'as utilizado en el Estado del Arte y
+            con el que plantean se ha obtenido mejores resultados.
+        
+            \subsection{CNN}
+            En la Red Neuronal Convolucional se utiliz\'o directamente las matrices de pixeles de las im\'agenes de escrituras para entrenar el modelo. 
+            Primeramente se hizo un reescalado de la imagen para que todas tuviesen la misma resoluci\'on y luego se utilizaron en el entrenamiento de una CNN de 5 capas.
+            Las 4 primeras capas tienen una funci\'on de activaci\'on relu, mientras que la \'ultima tiene una sigmoidal, esta presenta 5 neuronas, una por cada uno de los rasgos del BigFive a predecir.
+
+        \subsection{K-Means}
+            El n\'umero de cl\'usters K, que mejor se ajuste a la situaci\'on se determin\'o con el m\'etodo del codo. Se entren\'o el 
+            modelo \texttt{KMeans} de sklearn.clusters con los datos procedentes de los features extra\'idos de las im\'agenes y los resultados del 
+            test BigFive.
+        
+            \subsection{SVM}
+            Para la m\'aquina de soporte vectorial, como las clasificaciones seg\'un BigFive para cada uno de los rasgos punt\'ua con un valor de 0 a 120, y SVM separa por categor\'ia,
+            reescalamos los resultados deo BigFive de 0 a 11, agrupando los valores del big five de 10 en 10. Como adem\'as los rasgos del Big Five son independientes, si con la grafolog\'ia fuera posible determinarlos, su valor depender\'ia solo de los rasgos de las letrasy no uno de otro.
+            Por tanto se cre\'o una SVM por cada uno de los 5 rasgos de Big Five de modo que permita clasificar para cada persona los niveles de cada caracter\'istica en que se encuentra. Para esto se enten\'o el modelo \texttt{SVC} de sklearn.svm con los features estraidos de las fotos y con uno de los rasgos del BgFive en cada caso.
+            Los datos fueron reescalados usando \texttt{StandardScaler} de sklearn.preprocessing.
+            Como la clasificaci\'on es de m\'as de 2 categor\'ias se emple\'o una estrategia de clasificaci\'on de one-versus-one (ovo) y un kernel lineal que aunque es el m\'as sencillo se utiliza mucho en el Estado del Arte.
+
+    \section{Resultados}
+
+    \section{Resumen}
+        En este trabajo se realiz\'o un estudio profundo de Machine Learnin aplicado a Grafolog\'ia, desde la consulta al Estado del Arte, Construcci\'on y Taggeo de 
+        un Dataset, estracci\'on de Features de las im\'agenes, entrenamiento de Algoritmos de ML y an\'alisis de resultados. A modo general el flujo de tranbajo queda representado 
+        en la siguiente imagen: 
+
+        \begin{figure}[!h]
+            \centering
+            \includegraphics[width = 0.5\linewidth]{photo_2023-05-29_02-40-00.jpg}
+            \caption{Flujo del trabajo del Proyecto.}
+        \end{figure}
 
 \begin{thebibliography}{99}
     %-----------------------------------------------------------------------------------
