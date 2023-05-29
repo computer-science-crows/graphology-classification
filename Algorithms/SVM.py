@@ -53,7 +53,7 @@ def SupportVectorMachine(X_train, X_test, y_train, y_test, kernel):
     #Crear SVM
     clf = SVC(decision_function_shape='ovo', kernel=kernel)
     clf.fit(X_train, y_train)
-    y_pred = clf.predict(y_test)
+    y_pred = clf.predict(X_test)
     return accuracy_score(y_test, y_pred)
 
 accuracy1 = SupportVectorMachine(X_train1, X_test1, y_train1, y_test1, 'linear')
