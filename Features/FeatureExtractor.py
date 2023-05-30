@@ -22,7 +22,7 @@ class FeaturesInfo():
         imgbl2 = Baseline.rotate(img2, angle) 
         self.line_space = LineSpace.LineSpaceFeature(imgbl2)
         self.margin = Margin.MarginFeature(imgbl2)
-        self.slant = Slant.SlantFeature(img)
+        self.slant = Slant.SlantFeature(image)
 
     
     def thresholding(img):
@@ -36,7 +36,3 @@ class FeaturesInfo():
         img = cv2.GaussianBlur(img, (5,5),0)
         img1, img2 = FeaturesInfo.thresholding(img)
         return img1, img2
-
-img = cv2.imread("C:/Users/User/Desktop/Ciber/MATCOM/Cuarto/ML/graphology-classification/Features/Aida_2.jpg")
-FeaturesInfo(img)
-

@@ -2,18 +2,26 @@ import os
 import numpy as np
 import pandas as pd
 
+import sys
+sys.path.append('./Features')
+
+from FeatureExtractor import FeaturesInfo
+
+class data:
+    def __init__(self, matrix, big_five, features=None) -> None:
+        self.matrix = matrix
+        self.big_five = big_five
+        self.features = features
+
 
 def get_xslx():
     cwd = os.getcwd()
     return pd.read_excel(cwd+'/Scrapper/big_five.xlsx')
-    # return pd.read_excel('D:/UniVerSiDaD/IV Ano/Machine Learning/Project/Graphology classification/graphology-classification/Scrapper/big_five.xlsx')
 
 
 def get_images():
     cwd = os.getcwd()
     path = cwd+'/Image_Matrix/Img_npy'
-
-    # path = 'D:/UniVerSiDaD/IV Ano/Machine Learning/Project/Graphology classification/graphology-classification/Image_Matrix/Img_npy'
 
     folders_names = os.listdir(path)
 
@@ -50,9 +58,13 @@ def build_dataset():
 
     for i in range(len(xlsx)):
         for j in npys[i]:
-            dataset.append((j, xlsx.values[i]))
-
+            print(len(dataset))
+            dataset.append(data(j, xlsx.values[i], FeaturesInfo(j)))
     return dataset
 
 
-dataset = build_dataset()
+def main():
+    dataset = build_dataset()
+    arr = np.asanyarray(dataset, dtype=object)
+    np.save('Dataset/dataset_feat', arr)
+# main()

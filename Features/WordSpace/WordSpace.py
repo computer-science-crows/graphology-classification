@@ -26,7 +26,7 @@ def WordSpaceFeature(img): #img es imagen en binario
     words_rectangles = []
     for ctr in sorted_contours_lines:
             x,y,w,h = cv2.boundingRect(ctr)
-            if x+ w> img2.shape[1] or y+h> img2.shape[0] or w < img2.shape[1]/30:continue
+            if x+ w> img2.shape[1] or y+h> img2.shape[0] or w < img2.shape[1]/50:continue
             cv2.rectangle(img2, (x,y),(x+w,y+h), (255,255,255),2)
             words_rectangles.append((x,x+w))
             plt.imshow(img2, cmap="binary")

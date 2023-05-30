@@ -19,7 +19,7 @@ def MarginFeature(img): #Recibe imagen en binario preprocesada
     
     plt.imshow(img, cmap="binary")
     plt.plot([margin_px_line,margin_px_line], [0,img.shape[0]], color='red')
-    plt.show()
+    #plt.show()
     
     if margin_px_line > img.shape[1]//25: #Este porcentaje esta sujeto a cambios
         return BIG_MARGIN
