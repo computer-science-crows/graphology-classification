@@ -173,4 +173,7 @@ Report/Report.fdb_latexmk
 Report/Report.fdb_latexmk
 .vscode/settings.json
 Dataset/dataset_feat.npy
+Dataset/train.npy
+Dataset/test.npy
+Dataset/validation.npy
 Algorithms/dataset_feat.npy
