@@ -6,10 +6,39 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-df = np.load('Dataset/dataset_feat.npy', allow_pickle=True)
+def group_10(big_five):
+    big_five = np.array(big_five)
+    big_five[big_five <=10] = 130
+    big_five[big_five <= 20] = 2
+    big_five[big_five == 130] = 0
+    big_five[big_five >110] = 11
+    big_five[big_five >100] = 10
+    big_five[big_five > 90] = 9
+    big_five[big_five > 80] = 8
+    big_five[big_five >70] = 7
+    big_five[big_five >60] = 6
+    big_five[big_five >50] = 5
+    big_five[big_five >40] = 4
+    big_five[big_five >30] = 3
+    big_five[big_five >20] = 1
+    return big_five
 
-matrix = np.array([i.matrix for i in df])
-res = np.array([i.big_five for i in df])
+df = np.load('Dataset/dataset_feat.npy', allow_pickle=True)
+tr = np.load('Dataset/train.npy', allow_pickle=True)
+te = np.load('Dataset/test.npy', allow_pickle=True)
+
+matrix = [i.matrix for i in tr]
+matrix2 = [i.matrix for i in te]
+matrix.extend(matrix2)
+matrix = np.array(matrix)
+
+
+res = [i.big_five for i in tr]
+res2 = [i.big_five for i in te]
+res.extend(res2)
+res = np.array(res)
+
+res = group_10(res)
 
 def resizing(matrix, res, x, y):
     mtz = np.array([cv2.resize(i, (x, y)).astype('int64') for i in matrix])
