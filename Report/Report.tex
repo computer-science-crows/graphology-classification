@@ -21,9 +21,9 @@
         La grafología es una técnica que estudia las características psicológicas de las personas a través de su escritura. 
         En algunos centros laborales se utilizan este tipo de análisis para determinar cuando contratar o no a alguien y se emplea también 
         para analizar a criminales y en el prceso de determinar trastornos en personas. Esta tarea realizada por expertos,
-        psicólogos y grfólogos, resulta complicada y los resultados están numerosas veces sujetos a la perspectiva de quien los analiza. La propuesta de este trabajo es 
-        utilizar algoritmos de Aprendizaje Máquina para automáticamente poder predecir características psicológicas de un individuo a partir de un fragmento de su escritura. 
-        Utilizaremos un conjunto de algoritmos de ML como: CNN, SVM y DT a modo comparativo para el análisis grafológico. 
+        psicólogos y grfólogos, resulta complicada y los resultados están, numerosas veces, sujetos a la perspectiva de quien los analiza. La propuesta de este trabajo es 
+        utilizar algoritmos de Aprendizaje de Máquina para automáticamente poder predecir características psicológicas de un individuo a partir de un fragmento de su escritura. 
+        Utilizaremos un conjunto de algoritmos de ML como: CNN(Convolutional Neural Network), SVM(Support Vector Machine) y DT(Decision Tree) a modo comparativo para el análisis grafológico. 
         Se propone la creaci\'on de una base de datos de im\'agenes con escritura a mano, as\'i como su uso para entrenar y comparar algunos modelos de Aprendizaje de M\'aquinas para predecir la personalida bas\'andonos en el Test de los Cinco Grandes(Big Five).
     \end{abstract}
     
@@ -106,12 +106,12 @@
         \subsection{Interlineado} 
 
             Para el interlineado se analizan dos clasificaciones posibles: Interlineado amplio (LINESPACE\_SEPARETED) e Interlineado peque\~no (LINESPACE\_CROWDED). Para encontrar el interlineado se utiliz\'o la t\'ecnica del perfil 
-            de proyeci\'on vertical suavizado(SPR) \cite{20}, esto permite separar las zonas de texto y espacios analizando los extremos del SPR, para las im\'agenes segmentadas es simple con este algoritmo determinar donde est\'a el texto correspondiente a la l\'inea y los espcaios superior e inferior
+            de proyeci\'on vertical suavizado(SPR) \cite{20}, esto permite separar las zonas de texto y espacios analizando los extremos del SPR, para las im\'agenes segmentadas es simple con este algoritmo determinar donde est\'a el texto correspondiente a la l\'inea y los espacios superior e inferior
             correspondientes al interlineado, as\'i se puede determinar si una l\'inea est\'a muy unida a sus adyacentes considerando la proporci\'on de p\'ixeles de foreground (pixeles negros correspondientes a texto) que existen en 
             las regiones identificadas como espacio.
 
-            Para analizar los SPR se separa la imagen en regiones vertiales de tema\~no 5\% del ancho de la imagen, se hace el SPR de cada uno, se determonan las regiones de texto y espacio \cite{22} y se calcula la densidad 
-            de p\'ixeles de foreground en los espacios . Finalmente se promedian los resultados de densidades para cada secci\'on vertical para determira si la l\'inea est\'a muy separada o muy pegada a sus adyacentes. 
+            Para analizar los SPR se separa la imagen en regiones verticales de tama\~no 5\% del ancho de la imagen. Luego, se hace el SPR de cada uno, se determinan las regiones de texto y espacio \cite{22} y se calcula la densidad 
+            de p\'ixeles de foreground en los espacios. Finalmente, se promedian los resultados de densidades para cada secci\'on vertical, para determinar si la l\'inea est\'a muy separada o muy pegada a sus adyacentes. 
 
             \begin{figure}[!h]
                 \centering
@@ -120,9 +120,9 @@
             \end{figure}
         \subsection{Margen} 
         
-            Para determinar el margen se pueden considerar tanto los m\'argenes superior e inferior como los m\'argenes laterales \cite{21}, para nuestro Dataset, como las im\'agenes son l\'ineas manuscritas no tiene sentido analizar los m\'argenes superior e inferior, por tanto solo 
+            Para determinar el margen se pueden considerar tanto los m\'argenes superior e inferior como los m\'argenes laterales \cite{21}. Para nuestro Dataset, como las im\'agenes son l\'ineas manuscritas, no tiene sentido analizar los m\'argenes superior e inferior. Por tanto, solo 
             se clasifica el margen lateral izquierdo en cuanto a su ancho como: Margen ancho (BIG\_MARGIN) y margen estrecho (SMALL\_MARGIN). Para esto se analiz\'o el perfil de proyeccci\'on (PR) horizontal de cada im\'agen tomando el rango del PR desde el elemento 0 hasta que el valor del PR 
-            sea mayo que una tolerancia espec\'ificada, es decir mientras que la densidad de p\'ixeles en el foreground para cada columna de la imagen sea menor que un valor relativo al largo de la iamgen. 
+            sea mayor que una tolerancia especificada; es decir, mientras que la densidad de p\'ixeles en el foreground para cada columna de la imagen sea menor que un valor relativo al largo de la imagen. 
 
             \begin{figure}[!h]
                 \centering
@@ -131,18 +131,18 @@
             \end{figure}
         \subsection{Espaciado} 
 
-            El espaciado so los espacios dejados entre caracteres y palabras en una misma l\'inea, para clasificar el espaciado se realiz\'o a cada im\'agen un trabajo con filtros morfol\'ogicos, seleccionando un kernel horizontal para realizar una convoluci\'on con la imagen 
-            que permita unificar los trazos de todo lo que est\'e escrito unido de una misma palabra para de este modo separar las palabras enmarc\'andolas en recuadros, as\'i el espaciado se puede determinar como la distancia promedio entre los recuadros.
+            El espaciado, son los espacios dejados entre caracteres y palabras en una misma l\'inea. Para clasificar el espaciado se realiz\'o a cada imagen un trabajo con filtros morfol\'ogicos; seleccionando un kernel horizontal para realizar una convoluci\'on con la imagen 
+            que permita unificar los trazos de todo lo que est\'e escrito unido de una misma palabra para de este modo separar las palabras enmarc\'andolas en recuadros. As\'i el espaciado se puede determinar como la distancia promedio entre los recuadros.
 
             \begin{figure}[!h]
                 \centering
                 \includegraphics[width = 0.5\linewidth]{Espaces.png}
-                \caption{Recuedros que bordean al texto escrito sin espacios.}
+                \caption{Recuadros que bordean al texto escrito sin espacios.}
             \end{figure}
 
         \subsection{Inclinaci\'on de la L\'inea}
-            Para determinar la inclinaci\'on de la letra en una l\'inea se realiz\'o el procedimiento descrito en \cite{20}, rotando la im\'agen desde $-30^{\circ}$ hasta $30^{\circ}$, 
-            determinando para cu\'al de los valores de la rotaci\'on la cantidad de p\'ixeles de foreground es m\'axima para la zona central de la imagen. Para los \'angulos comprendidos 
+            Para determinar la inclinaci\'on de la letra en una l\'inea se realiz\'o el procedimiento descrito en \cite{20}, rotando la im\'agen desde $-30^{\circ}$ hasta $30^{\circ}$. 
+            Determinando para cu\'al de los valores de la rotaci\'on la cantidad de p\'ixeles de foreground es m\'axima para la zona central de la imagen. Para los \'angulos comprendidos 
             entre $ [-30; -5) $ se dice que la linea base es Ascendente (ASCENDING), entre $[-5; 5]$ es Nivelada (LEVELED) y entre $(5; 30]$ es Descendente (DESCENDING). 
 
             \begin{figure}[!h]
