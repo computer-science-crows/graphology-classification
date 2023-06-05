@@ -173,6 +173,30 @@
             En la Red Neuronal Convolucional se utiliz\'o directamente las matrices de pixeles de las im\'agenes de escrituras para entrenar el modelo. 
             Primeramente se hizo un reescalado de la imagen para que todas tuviesen la misma resoluci\'on y luego se utilizaron en el entrenamiento de una CNN de 5 capas.
             Las 4 primeras capas tienen una funci\'on de activaci\'on relu, mientras que la \'ultima tiene una sigmoidal, esta presenta 5 neuronas, una por cada uno de los rasgos del BigFive a predecir.
+            
+            Usando 3 capas de convolucion, reajuste de las im\'agenes a 32x32, los datos agrupados en 10 diferentes grupos, 5 neuronas de salida (una por cada rasgo) la m\'etrica de mean absolute error brinda los siguientes valores:
+            MAE for feature 0: 1.3867782231034904
+            MAE for feature 1: 1.304610701813095
+            MAE for feature 2: 0.9960057525342452
+            MAE for feature 3: 1.356362326391812
+            MAE for feature 4: 1.3710135627980433
+            Con una presici\'on igual a 76.048.
+
+            Si se entrena con exactamente las mismas caracter\'isticas pero con im\'agenes ajustadas a 64x64, para mayor calidad, obtenemos los siguientes resultados:
+            MAE for feature 0: 1.2410950697244811
+            MAE for feature 1: 1.0932612272971434
+            MAE for feature 2: 0.9566778752995634
+            MAE for feature 3: 1.0583139525519476
+            MAE for feature 4: 1.2694159266592442
+            Con una presici\'on igual a 75.901.
+
+            Haci\'endolo con dimensiones 128x128:
+            MAE for feature 0: 1.308632514485911
+            MAE for feature 1: 1.107600970286519
+            MAE for feature 2: 0.8781356299973996
+            MAE for feature 3: 1.008931401132167
+            MAE for feature 4: 1.2417590243606276
+            Con presici\'on igual a 75.606.
 
         \subsection{K-Means}
             El n\'umero de cl\'usters K, que mejor se ajuste a la situaci\'on se determin\'o con el m\'etodo del codo. Se entren\'o el 
