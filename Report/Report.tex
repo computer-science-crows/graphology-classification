@@ -12,19 +12,27 @@
 	    urlcolor=blue}
 
 \begin{document}
-    \title{An\'alisis Grafol\'ogico.}
-    \author{Sheyla Leyva S\'anchez \\ Alejandra Monz\'on Pe\~na \\ Laura Riera \\ Andry Rosquet \\ Kevin Talavera \\ Javier}
-    \date{}
-    \maketitle
-
+    \begin{center}
+    	\large Aprendizaje de M\'aquinas	\\
+    	\huge \textbf{An\'alisis Grafol\'ogico} \\
+    	
+    	\includegraphics[height=5cm]{logo1.png}
+    	
+    	\normalsize Sheyla Leyva S\'anchez \\  Alejandra Monz\'on Pe\~na \\ Laura Victoria Riera P\'erez \\ Andry Rosquet Rodr\'iguez \\ Kevin Talavera D\'iaz \\ Javier Villar Alonso \\
+    	
+    	\vspace{1em}
+    	\small Cuarto a\~no. Ciencias de la Computaci\'on. \\
+   		\small Facultad de Matem\'atica y Computaci\'on, Universidad de La Habana, Cuba 
+    \end{center}
+	
+	\vspace{0.05em}
+	\normalsize
     \begin{abstract}
         La grafología es una técnica que estudia las características psicológicas de las personas a través de su escritura. 
-        En algunos centros laborales se utilizan este tipo de análisis para determinar cuando contratar o no a alguien y se emplea también 
-        para analizar a criminales y en el prceso de determinar trastornos en personas. Esta tarea realizada por expertos,
-        psicólogos y grfólogos, resulta complicada y los resultados están, numerosas veces, sujetos a la perspectiva de quien los analiza. La propuesta de este trabajo es 
-        utilizar algoritmos de Aprendizaje de Máquina para automáticamente poder predecir características psicológicas de un individuo a partir de un fragmento de su escritura. 
-        Utilizaremos un conjunto de algoritmos de ML como: CNN(Convolutional Neural Network), SVM(Support Vector Machine) y DT(Decision Tree) a modo comparativo para el análisis grafológico. 
-        Se propone la creaci\'on de una base de datos de im\'agenes con escritura a mano, as\'i como su uso para entrenar y comparar algunos modelos de Aprendizaje de M\'aquinas para predecir la personalida bas\'andonos en el Test de los Cinco Grandes(Big Five).
+        En algunos centros laborales se utilizan este tipo de análisis para determinar cuando contratar o no a alguien y se emplea también para analizar a criminales y en el proceso de determinar trastornos en personas. Esta es una tarea complicada realizada por expertos, psicólogos y grafólogos, y sus resultados están, numerosas veces, sujetos a la perspectiva de quien los analiza. 
+        En este trabajo se propone utilizar algoritmos de Aprendizaje de Máquina, para automáticamente poder predecir características psicológicas de un individuo a partir de un fragmento de su escritura. 
+        Con este objetivo se propone la creaci\'on de una base de datos de im\'agenes de escritura a mano, as\'i como su uso para entrenar y comparar los modelos para predecir la personalidad basado en el Test de los Cinco Grandes (Big Five).
+        Se implementaron los algoritmos Convolutional Neural Network (CNN), Support Vector Machine (SVM), K-Nearest Neighbours (KNN) y K-Means, estableciendo una comparaci\'on de los resultados obtenidos para el an\'alisis grafol\'ogico. 
     \end{abstract}
     
     \section{Grafolog\'ia}
@@ -34,7 +42,7 @@
         y una práctica científicamente cuestionable.\\ 
 
         Tal y como se menciona en el art\'iculo \cite{19} la grafolog\'ia no se utiliza para predecir el futuro o conocer el pasado de una persona. Su uso 
-        est\'a dado como una habilidad para conocer el estado psicol\'ogico de la persona en el momento que escribe, incluso se plantea que los resultado de este an\'alisis 
+        est\'a dado como una habilidad para conocer el estado psicol\'ogico de la persona en el momento que escribe, incluso se plantea que los resultados de este an\'alisis 
         puede depender de la edad de la persona o del momento en que redacta; es decir una misma persona puede tener resultados diferentes si se analiza su escritura en dos momentos 
         diferentes de su vida.\\
 
@@ -55,7 +63,7 @@
         La combinaci\'on de Aprendizaje M\'aquina y Grafolog\'ia es abordada en un amplio conjunto de art\'iculos en los que se prueban ideas diversas, e incluso se comparan los resultados obtenidos haciendo uso de
         diferentes t\'ecnicas y combin\'andolas.\\ 
 
-        En los art\'iculos \cite{1} y \cite{2} abordan ideas de preprocesado de las im\'agenes manuscritas haciendo uso del unbral adaptativo Gaussiano y llevando a binario los valores de los p\'ixeles de la im\'agen atendiendo a un
+        En los art\'iculos \cite{1} y \cite{2} abordan ideas de preprocesado de las im\'agenes manuscritas haciendo uso del umbral adaptativo Gaussiano y llevando a binario los valores de los p\'ixeles de la im\'agen atendiendo a un
         nivel de tolerancia prefijada.\\ 
 
         Las Redes Neuronales Convolucionales (CNN) debido a su amplio uso para el trabajo con im\'agenes, en el art\'iculo \cite{1} se usan las CNN como m\'etodo propuesto en la arquitectura de una p\'agina web que permita determinar la personalidad 
@@ -78,7 +86,7 @@
         internet que se han utilizado en otros art\'iculos, en la misma describen cu\'ales son los tags presentes en cada uno de los datasets, si son p\'ublicos o no, en qu\'e atrt\'iculos se utilizan y 
         de que a\~no son. \\ 
 
-        Al analizar este contenido resulta relevante que los tags que est\'an presentes en esos sets de s=datos son escasos, apenas ponen informaci\'on como mano con la que escribe el sujeto, sexo, 
+        Al analizar este contenido resulta relevante que los tags que est\'an presentes en esos sets de datos son escasos, apenas ponen informaci\'on, como mano con la que escribe el sujeto, sexo, 
         ciudad en la que vive y poco m\'as. \\ 
 
         Se descargaron los datasets de HandwritingDatabase \cite{15} y iam-handwriting-database \cite{16}, el primero conten\'ia un conjunto de im\'agenes de textos manuscritos e informaci\'on de cada persona como sexo, estado de EEUU donde naci\'o 
@@ -100,7 +108,7 @@
         de los 5 rasgos distintivos del Big Five, para esto se emple\'o un c\'odigo de python que scrapea las p\'aginas web de los resultados del test.\\ 
 
     \section{Extracci\'on de Features}
-        Para extraer los features de las im\'agenes del DataSer se utilizaron algoritmos de procesamiento de im\'agenes. Previamente las im\'agenes se les realiz\'o un 
+        Para extraer los features de las im\'agenes del DataSet se utilizaron algoritmos de procesamiento de im\'agenes. Previamente a las im\'agenes se les realiz\'o un 
         preprocesado para eliminar ruidos y llevarlas a binario; los features extra\'idos son: Interlineado (LineSpace), Espaciado (WordSpace), Margen (Margin), Inclionaci\'on de la l\'inea (Baseline) e Inclinaci\'on de las letras (Slant). 
 
         \subsection{Interlineado} 
@@ -358,7 +366,64 @@
                 \item [] Accuracy kernel polinomial: 0.3089
                 \item [] Accuracy kernel rbf: 0.2292
             \end{itemize}
-
+	
+		\subsection{K-Means}
+		
+		\subsubsection{Descubrir rasgos de caligraf\'ia a partir de rasgos de personalidad}
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width = 6cm]{ElbowM_Distortion_bf.png}
+			\includegraphics[width = 6cm]{ElbowM_Inertia_bf.png}
+			\caption{M\'etodo del codo para medidas distorsi\'on (izquierda) e inercia (derecha) con n\'umero de cl\'usters=[2, 14].}
+		\end{figure}
+	
+		\begin{figure}[!h]
+			\centering
+			\includegraphics[width = 3.5cm]{silhouette_visualization_2_bf.png}
+			\includegraphics[width = 3.5cm]{silhouette_visualization_3_bf.png}
+			\includegraphics[width = 3.5cm]{silhouette_visualization_4_bf.png}
+			
+			\includegraphics[width = 3.5cm]{silhouette_visualization_5_bf.png}
+			\includegraphics[width = 3.5cm]{silhouette_visualization_6_bf.png}
+			\includegraphics[width = 3.5cm]{silhouette_visualization_7_bf.png}
+			
+			\includegraphics[width = 3.5cm]{silhouette_visualization_8_bf.png}
+			\includegraphics[width = 3.5cm]{silhouette_visualization_9_bf.png}
+			\includegraphics[width = 3.5cm]{silhouette_visualization_10_bf.png}
+		
+			\includegraphics[width = 3.5cm]{silhouette_visualization_11_bf.png}
+			\includegraphics[width = 3.5cm]{silhouette_visualization_12_bf.png}
+			\includegraphics[width = 3.5cm]{silhouette_visualization_13_bf.png}
+			
+			\includegraphics[width = 3.5cm]{silhouette_visualization_14_bf.png}
+			
+			\caption{M\'etodo de la silueta con n\'umero de cl\'usters=[2, 14].}
+		\end{figure}
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width = 6cm]{SilhouetteM_bf.png}
+			\caption{M\'etodo de la silueta con n\'umero de cl\'usters=[2, 14].}
+		\end{figure}
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width = 6cm]{Original_Data_2d_bf.png}
+			\includegraphics[width = 6cm]{Clustered_Data_2d_k10_seed45_bf.png}
+			\caption{Datos originales (izquierda) y datos despu\'es de aplicarles clustering (derecha) para k=10 en dos dimensiones.}
+		\end{figure}
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width = 6cm]{Original_Data_3d_bf.png}
+			\includegraphics[width = 6cm]{Clustered_Data_3d_k10_seed45_bf.png}
+			\caption{Datos originales (izquierda) y datos despu\'es de aplicarles clustering (derecha) para k=10 en tres dimensiones.}
+		\end{figure}
+		\newpage
+		
+		\subsubsection{Descubrir rasgos de personalidad a partir de features}
+    
     \section{Resumen}
         En este trabajo se realiz\'o un estudio profundo de Machine Learnin aplicado a Grafolog\'ia, desde la consulta al Estado del Arte, Construcci\'on y Taggeo de 
         un Dataset, estracci\'on de Features de las im\'agenes, entrenamiento de Algoritmos de ML y an\'alisis de resultados. A modo general el flujo de tranbajo queda representado 
