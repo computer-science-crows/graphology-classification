@@ -9,12 +9,11 @@ from sklearn.decomposition import PCA
 from sklearn.metrics import silhouette_score
 from yellowbrick.cluster import silhouette_visualizer
 
-
+# global parameters
 seed = 0
 nk = 11
 k = 6
-cwd = os.getcwd() + \
-    f'/Algorithms/Kmeans_plots/data=features/seed{seed}/nk{nk-1}/'
+cwd = os.getcwd() + '/Algorithms/Kmeans_plots/'
 
 
 def k_means():
@@ -31,11 +30,26 @@ def k_means():
         bf = ds[i].big_five
         data.append(bf)
 
+    # uncomment these lines to cluster according to big five personality traits in dataset
+    # cwd += f'data=bigfive/seed{seed}/nk{nk-1}/'
+
+    # elbow_method(data, nk, seed)
+    # shilouette_method(data, nk, seed)
+
+    # plot_results_2d(data, k, seed)
+    # plot_results_3d(data, k, seed)
+
+    # infered_results(data, features, k, seed)
+
+    # ----------------------------------------------------------------------------------- #
+    # uncomment these lines to cluster according to handwriting features in dataset
+    # cwd += f'data=features/seed{seed}/nk{nk-1}/'
+
     # elbow_method(features, nk, seed)
     # shilouette_method(features, nk, seed)
 
-    plot_results_2d(features, k, seed)
-    plot_results_3d(features, k, seed)
+    # plot_results_2d(features, k, seed)
+    # plot_results_3d(features, k, seed)
 
     # infered_results(features, data, k, seed)
 
