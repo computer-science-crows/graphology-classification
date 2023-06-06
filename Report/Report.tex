@@ -115,8 +115,8 @@
 
             Para el interlineado se analizan dos clasificaciones posibles: Interlineado amplio (LINESPACE\_SEPARETED) e Interlineado peque\~no (LINESPACE\_CROWDED). Para encontrar el interlineado se utiliz\'o la t\'ecnica del perfil 
             de proyeci\'on vertical suavizado(SPR) \cite{20}, esto permite separar las zonas de texto y espacios analizando los extremos del SPR, para las im\'agenes segmentadas es simple con este algoritmo determinar donde est\'a el texto correspondiente a la l\'inea y los espacios superior e inferior
-            correspondientes al interlineado, as\'i se puede determinar si una l\'inea est\'a muy unida a sus adyacentes considerando la proporci\'on de p\'ixeles de foreground (pixeles negros correspondientes a texto) que existen en 
-            las regiones identificadas como espacio.
+            correspondientes al interlineado, as\'i se puede determinar si una l\'inea est\'a muy unida a sus adyacentes considerando la proporci\'on de p\'ixeles de foreground (p\'ixeles negros correspondientes a texto) que existen en 
+            las regiones identificadas como espacio. \\
 
             Para analizar los SPR se separa la imagen en regiones verticales de tama\~no 5\% del ancho de la imagen. Luego, se hace el SPR de cada uno, se determinan las regiones de texto y espacio \cite{22} y se calcula la densidad 
             de p\'ixeles de foreground en los espacios. Finalmente, se promedian los resultados de densidades para cada secci\'on vertical, para determinar si la l\'inea est\'a muy separada o muy pegada a sus adyacentes. 
@@ -168,9 +168,9 @@
             la suma del PR normalizado, tal y como se plantea en \cite{20}.
 
     \section{Algoritmos Utilizados}
-        Para la investigsci\'on sobre Grafolog\'ia con ML se utilizaron a modo comparativo los algoritmos m\'as citados en el Estado del Arte de este tema. 
+        Para la investigsci\'on sobre Grafolog\'ia con aprendizaje de m\'aquinas se utilizaron a modo comparativo los algoritmos m\'as citados en el Estado del Arte de este tema. 
         Para probar cada uno de ellos se dividi\'o el dataset en  conjuntos: Entrenamiento/Test y Validaci\'on con tama\~no $75\%$ y $25\%$ de las personas que conforman el dataset respectivamente.
-        Primero se seleccion\'o el conjunto de personas para hacer la validaci\'on y se separaron las im\'agenes de sus escritures, features extra\'idos y resultados del test BigFive. Luego a los restantes datos del dataset 
+        Primero se seleccion\'o el conjunto de personas para hacer la validaci\'on y se separaron las im\'agenes de sus escrituras, features extra\'idos y resultados del test BigFive. Luego a los restantes datos del dataset 
         se les aplic\'o k-fold para dividir los datos de tests y entrenamiento.  
         
         \subsection{KNN}
@@ -183,14 +183,11 @@
             Primeramente se hizo un reescalado de la imagen para que todas tuviesen la misma resoluci\'on y luego se utilizaron en el entrenamiento de una CNN.
             Para la \'ultima capa de la CNN se tienen 5 neuronas, una por cada uno de los rasgos del BigFive a predecir.\\
             
-            Se probaron con varias ideas de entrenamiento, variando las dimensiones de las im\'agenes para determinar si la calidad afecta en mayor o menor medida 
-            la clasificaci\'on. No obstante teniendo en cuanta las caracter\'isticas del dataset, en cuanto al vol\'umen de im\'agenes el modelo con Redes Neuronales es propenso 
+            Se probaron con varias ideas de entrenamiento, variando las dimensiones de las im\'agenes para determinar si la calidad afecta en mayor o menor medida la clasificaci\'on. No obstante teniendo en cuanta las caracter\'isticas del dataset, en cuanto al vol\'umen de im\'agenes el modelo con Redes Neuronales es propenso 
             a overfit con pocas im\'agenes. 
 
         \subsection{K-Means}
-            El n\'umero de cl\'usters K, que mejor se ajuste a la situaci\'on se determin\'o con el m\'etodo del codo. Se entren\'o el 
-            modelo \texttt{KMeans} de sklearn.clusters con los datos procedentes de los features extra\'idos de las im\'agenes y los resultados del 
-            test BigFive.
+        	Se utiliz\'o el modelo \texttt{KMeans} de sklearn.clusters con los datos procedentes de los features extra\'idos de las im\'agenes y los resultados del test BigFive, siguiendo dos enfoques para el an\'alisis: a partir de los features determinar las caracter\'isticas de la personalidad asociadas; y viceversa, a partir de los resultados del big five tratar de hallar los rasgos de la escritura que se repiten a trav\'es de los cl\'usters. Para determinar el n\'umero de cl\'usters K que mejor se ajusta a los datos se implementaron el m\'etodo del codo para las medidas de inercia y distorsi\'on, y el m\'etodo de la silueta. Adem\'as se implementaron m\'etodos para poder visualizar todos estos resultados en distintas dimensiones. 
         
         \subsection{SVM}
             Para la m\'aquina de soporte vectorial, como las clasificaciones seg\'un BigFive para cada uno de los rasgos punt\'ua con un valor de 0 a 120, y SVM separa por categor\'ia,
@@ -371,14 +368,14 @@
 		
 		\subsubsection{Descubrir rasgos de caligraf\'ia a partir de rasgos de personalidad}
 		
-		\begin{figure}[h!]
+		\begin{figure}[hbt!]
 			\centering
 			\includegraphics[width = 6cm]{ElbowM_Distortion_bf.png}
 			\includegraphics[width = 6cm]{ElbowM_Inertia_bf.png}
 			\caption{M\'etodo del codo para medidas distorsi\'on (izquierda) e inercia (derecha) con n\'umero de cl\'usters=[2, 14].}
 		\end{figure}
 	
-		\begin{figure}[!h]
+		\begin{figure}[hbt!]
 			\centering
 			\includegraphics[width = 3.5cm]{silhouette_visualization_2_bf.png}
 			\includegraphics[width = 3.5cm]{silhouette_visualization_3_bf.png}
@@ -401,13 +398,13 @@
 			\caption{M\'etodo de la silueta con n\'umero de cl\'usters=[2, 14].}
 		\end{figure}
 		
-		\begin{figure}[h!]
+		\begin{figure}[hbt!]
 			\centering
 			\includegraphics[width = 6cm]{SilhouetteM_bf.png}
 			\caption{M\'etodo de la silueta con n\'umero de cl\'usters=[2, 14].}
 		\end{figure}
 		
-		\begin{figure}[h!]
+		\begin{figure}[hbt!]
 			\centering
 			\includegraphics[width = 6cm]{Original_Data_2d_bf.png}
 			\includegraphics[width = 6cm]{Clustered_Data_2d_k10_seed45_bf.png}
@@ -420,14 +417,57 @@
 			\includegraphics[width = 6cm]{Clustered_Data_3d_k10_seed45_bf.png}
 			\caption{Datos originales (izquierda) y datos despu\'es de aplicarles clustering (derecha) para k=10 en tres dimensiones.}
 		\end{figure}
-		\newpage
 		
 		\subsubsection{Descubrir rasgos de personalidad a partir de features}
+    	
+    		\begin{figure}[hbt!]
+    		\centering
+    		\includegraphics[width = 6cm]{ElbowM_Distortion.png}
+    		\includegraphics[width = 6cm]{ElbowM_Inertia.png}
+    		\caption{M\'etodo del codo para medidas distorsi\'on (izquierda) e inercia (derecha) con n\'umero de cl\'usters=[2, 10].}
+    	\end{figure}
+    	
+    	\newpage
+    	\begin{figure}[hbt!]
+    		\centering
+    		\includegraphics[width = 3.5cm]{silhouette_visualization_2.png}
+    		\includegraphics[width = 3.5cm]{silhouette_visualization_3.png}
+    		\includegraphics[width = 3.5cm]{silhouette_visualization_4.png}
+    		
+    		\includegraphics[width = 3.5cm]{silhouette_visualization_5.png}
+    		\includegraphics[width = 3.5cm]{silhouette_visualization_6.png}
+    		\includegraphics[width = 3.5cm]{silhouette_visualization_7.png}
+    		
+    		\includegraphics[width = 3.5cm]{silhouette_visualization_8.png}
+    		\includegraphics[width = 3.5cm]{silhouette_visualization_9.png}
+    		\includegraphics[width = 3.5cm]{silhouette_visualization_10.png}
+    		
+    		\caption{M\'etodo de la silueta con n\'umero de cl\'usters=[2, 10].}
+    	\end{figure}
+    	
+    	\begin{figure}[hbt!]
+    		\centering
+    		\includegraphics[width = 6cm]{SilhouetteM.png}
+    		\caption{M\'etodo de la silueta con n\'umero de cl\'usters=[2, 10].}
+    	\end{figure}
+    	
+    	\begin{figure}[hbt!]
+    		\centering
+    		\includegraphics[width = 6cm]{Original_Data_2d.png}
+    		\includegraphics[width = 6cm]{Clustered_Data_2d_k7_seed45.png}
+    		\caption{Datos originales (izquierda) y datos despu\'es de aplicarles clustering (derecha) para k=7 en dos dimensiones.}
+    	\end{figure}
+    	
+    	\begin{figure}[hbt!]
+    		\centering
+    		\includegraphics[width = 6cm]{Original_Data_3d.png}
+    		\includegraphics[width = 6cm]{Clustered_Data_3d_k7_seed45.png}
+    		\caption{Datos originales (izquierda) y datos despu\'es de aplicarles clustering (derecha) para k=7 en tres dimensiones.}
+    	\end{figure}
     
-    \section{Resumen}
-        En este trabajo se realiz\'o un estudio profundo de Machine Learnin aplicado a Grafolog\'ia, desde la consulta al Estado del Arte, Construcci\'on y Taggeo de 
-        un Dataset, estracci\'on de Features de las im\'agenes, entrenamiento de Algoritmos de ML y an\'alisis de resultados. A modo general el flujo de tranbajo queda representado 
-        en la siguiente imagen: 
+    \newpage
+    \section{Conclusiones y trabajo futuro}
+        En este trabajo se realiz\'o un estudio profundo de aprendizaje de m\'aquinas aplicado a Grafolog\'ia, desde la consulta al Estado del Arte, Construcci\'on y Taggeo de un Dataset, extracci\'on de Features de las im\'agenes, entrenamiento de algoritmos y an\'alisis de resultados. A modo general el flujo de trabajo queda representado en la siguiente imagen: 
 
         \begin{figure}[!h]
             \centering
@@ -435,13 +475,11 @@
             \caption{Flujo del trabajo del Proyecto.}
         \end{figure}
 
-        Con los algoritmos empleados pudimos determinar que realmente la grafolog\'ia no puede determinar de 
-        forma certera la psicolog\'ia de una persona. Los modelos utilizados rondan el 50\% de efectividad en sus predicciones, 
-        lo cual dista de ser una clasificaci\'on fiable. De los modelos utilizados el SVM con clasificaciones en alto y bajo es el que mejores 
-        resultados ofreci\'o, en su mayor\'ia sobre el 80\% - 90\% de fiabilidad, pero igual de distante en identificar caracter\'isticas como la extroversi\'on.\\ 
+        Con los algoritmos empleados pudimos concluir que realmente la grafolog\'ia no puede determinar de 
+        forma certera la psicolog\'ia de una persona. Los modelos utilizados rondan el 50\% de efectividad en sus predicciones, lo cual dista de ser una clasificaci\'on fiable. De los modelos utilizados el SVM con clasificaciones en alto y bajo es el que mejores 
+        resultados ofreci\'o, en su mayor\'ia sobre el 80\% - 90\% de fiabilidad, pero igual distante en identificar caracter\'isticas como la extroversi\'on.\\ 
 
-        Se propone como idea de investigaci\'on futura la construcci\'on de un dataset de mayores dimensiones para probar estas y otras ideas de ML sobre grafolog\'ia, que 
-        permitan que los modelos no hagan overfit por la escac\'es de datos respecto al amplio n\'umero de categor\'ias para clasificar. 
+        Se propone como idea de investigaci\'on futura la construcci\'on de un dataset de mayores dimensiones para probar estas y otras ideas de aprendizaje de m\'aquinas sobre grafolog\'ia, que permitan que los modelos no hagan overfit por la escas\'es de datos respecto al amplio n\'umero de categor\'ias para clasificar. 
 
 \begin{thebibliography}{99}
     %-----------------------------------------------------------------------------------
