@@ -4,6 +4,7 @@
 \usepackage{graphicx}
 \usepackage{multicol}
 \usepackage[pdftex]{hyperref}
+\usepackage{float}
 
 \hypersetup{colorlinks,%
 	    citecolor=black,%
@@ -121,7 +122,7 @@
             Para analizar los SPR se separa la imagen en regiones verticales de tama\~no 5\% del ancho de la imagen. Luego, se hace el SPR de cada uno, se determinan las regiones de texto y espacio \cite{22} y se calcula la densidad 
             de p\'ixeles de foreground en los espacios. Finalmente, se promedian los resultados de densidades para cada secci\'on vertical, para determinar si la l\'inea est\'a muy separada o muy pegada a sus adyacentes. 
 
-            \begin{figure}[!h]
+            \begin{figure}[H]
                 \centering
                 \includegraphics[width = 0.5\linewidth]{Figure_1.png}
                 \caption{Segmento vertical de 5\% de imagen, en rojo el SPR y en azul los extremos del SPR, en el intermedio est\'a la zona de texto y en los bordes la zona de interlineado.}
@@ -132,7 +133,7 @@
             se clasifica el margen lateral izquierdo en cuanto a su ancho como: Margen ancho (BIG\_MARGIN) y margen estrecho (SMALL\_MARGIN). Para esto se analiz\'o el perfil de proyeccci\'on (PR) horizontal de cada im\'agen tomando el rango del PR desde el elemento 0 hasta que el valor del PR 
             sea mayor que una tolerancia especificada; es decir, mientras que la densidad de p\'ixeles en el foreground para cada columna de la imagen sea menor que un valor relativo al largo de la imagen. 
 
-            \begin{figure}[!h]
+            \begin{figure}[H]
                 \centering
                 \includegraphics[width = 0.5\linewidth]{Margin.png}
                 \caption{Desde el inicio hasta la l\'inea roja la secci\'on de margen.}
@@ -142,7 +143,7 @@
             El espaciado, son los espacios dejados entre caracteres y palabras en una misma l\'inea. Para clasificar el espaciado se realiz\'o a cada imagen un trabajo con filtros morfol\'ogicos; seleccionando un kernel horizontal para realizar una convoluci\'on con la imagen 
             que permita unificar los trazos de todo lo que est\'e escrito unido de una misma palabra para de este modo separar las palabras enmarc\'andolas en recuadros. As\'i el espaciado se puede determinar como la distancia promedio entre los recuadros.
 
-            \begin{figure}[!h]
+            \begin{figure}[H]
                 \centering
                 \includegraphics[width = 0.5\linewidth]{Espaces.png}
                 \caption{Recuadros que bordean al texto escrito sin espacios.}
@@ -153,7 +154,7 @@
             Determinando para cu\'al de los valores de la rotaci\'on la cantidad de p\'ixeles de foreground es m\'axima para la zona central de la imagen. Para los \'angulos comprendidos 
             entre $ [-30; -5) $ se dice que la linea base es Ascendente (ASCENDING), entre $[-5; 5]$ es Nivelada (LEVELED) y entre $(5; 30]$ es Descendente (DESCENDING). 
 
-            \begin{figure}[!h]
+            \begin{figure}[H]
                 \centering
                 \includegraphics[width = 0.4\linewidth]{Judith_21.jpg}
                 \includegraphics[width = 0.4\linewidth]{Baseline.png}
@@ -185,9 +186,6 @@
             
             Se probaron con varias ideas de entrenamiento, variando las dimensiones de las im\'agenes para determinar si la calidad afecta en mayor o menor medida la clasificaci\'on. No obstante teniendo en cuanta las caracter\'isticas del dataset, en cuanto al vol\'umen de im\'agenes el modelo con Redes Neuronales es propenso 
             a overfit con pocas im\'agenes. 
-
-        \subsection{K-Means}
-        	Se utiliz\'o el modelo \texttt{KMeans} de sklearn.clusters con los datos procedentes de los features extra\'idos de las im\'agenes y los resultados del test BigFive, siguiendo dos enfoques para el an\'alisis: a partir de los features determinar las caracter\'isticas de la personalidad asociadas; y viceversa, a partir de los resultados del big five tratar de hallar los rasgos de la escritura que se repiten a trav\'es de los cl\'usters. Para determinar el n\'umero de cl\'usters K que mejor se ajusta a los datos se implementaron el m\'etodo del codo para las medidas de inercia y distorsi\'on, y el m\'etodo de la silueta. Adem\'as se implementaron m\'etodos para poder visualizar todos estos resultados en distintas dimensiones. 
         
         \subsection{SVM}
             Para la m\'aquina de soporte vectorial, como las clasificaciones seg\'un BigFive para cada uno de los rasgos punt\'ua con un valor de 0 a 120, y SVM separa por categor\'ia,
@@ -196,13 +194,16 @@
             Los datos fueron reescalados usando \texttt{StandardScaler} de sklearn.preprocessing.
             Como la clasificaci\'on es de m\'as de 2 categor\'ias se emple\'o una estrategia de clasificaci\'on de one-versus-one (ovo) y se prob\'o el enfoque con los kernels: lineal, polinomial y rbf. De igual modo se hizo un an\'alisis seprando los rasgos en solo 2 categorias, Alto (1) y Bajo (0) y un an\'alisis final intentando predecir 
             los 5 rasgos en simult\'aneo
-
+			
+       \subsection{K-Means}
+			Se utiliz\'o el modelo \texttt{KMeans} de sklearn.clusters con los datos procedentes de los features extra\'idos de las im\'agenes y los resultados del test BigFive, siguiendo dos enfoques para el an\'alisis: a partir de los features determinar las caracter\'isticas de la personalidad asociadas; y viceversa, a partir de los resultados del big five tratar de hallar los rasgos de la escritura que se repiten a trav\'es de los cl\'usters. Para determinar el n\'umero de cl\'usters K que mejor se ajusta a los datos se implementaron el m\'etodo del codo para las medidas de inercia y distorsi\'on, y el m\'etodo de la silueta. Adem\'as se implementaron m\'etodos para poder visualizar todos estos resultados en distintas dimensiones. 
+			
     \section{Resultados}
             \subsection{KNN}
                 En la evaluaci\'on del KNN se tuvieron en cuenta las m\'etricas de \texttt{acurracy} y \texttt{precision}. Para cada uno de los rasgos por separado se
                 obtuvo en la etapa de entrenamiento/test los sigientes valores promedio para esas m\'etricas luego de utilizar un 5-Fold: \\
 
-                \begin{tabular}[h!]{|c|c|c|}
+                \begin{tabular}[H]{|c|c|c|}
 
                     \hline Categor\'ia & Accuracy promedio & Precisi\'on promedio \\  
                     \hline Neuroticismo & 0.543033653236376 & 0.43342082642200563 \\
@@ -213,15 +214,14 @@
                     \hline
                 \end{tabular}
 
-                \begin{figure}[h!]
+                \begin{figure}[H]
                     \centering
                     \includegraphics[width = 0.7\linewidth]{bar_knn.png}
                 \end{figure}
 
                 Posteriormente en la etapa de validaci\'on los resultados que se obtienen para \texttt{acurracy} y \texttt{precision} de cada rasgo son: 
 
-                \begin{tabular}[h!]{|c|c|c|}
-
+                \begin{tabular}[H]{|c|c|c|}
                     \hline Categor\'ia & Accuracy & Precisi\'on \\  
                     \hline Neuroticismo             & 0.910828025477707  & 0.4798657718120805 \\
                     \hline Extroversio\'n           & 0.4681528662420382 & 0.37875375375375375 \\
@@ -231,7 +231,7 @@
                     \hline
                 \end{tabular}
             
-                \begin{figure}[h!]
+                \begin{figure}[H]
                     \centering
                     \includegraphics[width = 0.7\linewidth]{bar2_knn.png}
                 \end{figure}
@@ -282,7 +282,7 @@
             entrenamiento/test, haciendo 5-Fold, se obtuvieron paracada razgo del Big Five los siguientes preomedios para las medias de
             \texttt{accuracy} y \texttt{precission}.
 
-            \begin{figure}[h!]
+            \begin{figure}[H]
                 \centering
                 \includegraphics[width = 0.3\linewidth]{Medias_Lineal10.png}
                 \includegraphics[width = 0.3\linewidth]{Medias_Polinomial10.png}
@@ -293,7 +293,7 @@
             Todas por debajo del 50\%, para estos modelos en la etapa de validaci\'on se obtuvieron los 
             siguientes valores de \texttt{accuracy} y las siguientes gr\'aficas para cada kernel. \\ 
 
-            \begin{tabular}[h!]{|c|c|c|c|}
+            \begin{tabular}[H]{|c|c|c|c|}
 
                 \hline Categor\'ia & Accur (Lineal) & Accur (Polinomial) & Accur (RBF) \\  
                 \hline Neuroticismo             & 0.0796 & 0.1401  &  0.1433\\
@@ -304,7 +304,7 @@
                 \hline
             \end{tabular}
 
-            \begin{figure}[h!]
+            \begin{figure}[H]
                 \centering
                 \includegraphics[width = 0.3\linewidth]{final_lineal10.png}
                 \includegraphics[width = 0.3\linewidth]{final_polinomial10.png}
@@ -316,7 +316,7 @@
             cada rasgo del BigFive y se obtuvieron resultados que var\'ian entre en 50\% y el 84\% de \texttt{accuracy} en la etapa 
             de entrenamiento/test del modelo tal y como muestran las gr\'aficas:\\ 
 
-            \begin{figure}[h!]
+            \begin{figure}[H]
                 \centering
                 \includegraphics[width = 0.3\linewidth]{Medias_Lineal.png}
                 \includegraphics[width = 0.3\linewidth]{Medias_Polinomial.png}
@@ -326,7 +326,7 @@
 
             En la etapa de validaci\'on se obtuvieron los siguientes valores de \texttt{accuracy}: \\ 
 
-            \begin{tabular}[h!]{|c|c|c|c|}
+            \begin{tabular}[H]{|c|c|c|c|}
 
                 \hline Categor\'ia & Accur (Lineal) & Accur (Polinomial) & Accur (RBF) \\  
                 \hline Neuroticismo             & 0.9617 & 0.9171  &  0.9171\\
@@ -338,7 +338,7 @@
             \end{tabular}
 
           
-            \begin{figure}[h!]
+            \begin{figure}[H]
                 \centering
                 \includegraphics[width = 0.3\linewidth]{final_lineal.png}
                 \includegraphics[width = 0.3\linewidth]{final_polinomial.png}
@@ -351,7 +351,7 @@
             debido a las dimensiones del dataset se obtuvieron bajos resultados para este enfoque debido a underfit, las gr\'aficas de las etapas entrenamiento/test y 
             validaci\'on se muestran a continuaci\'on, igual que los valores de \texttt{accuracy} en la etapa de validaci\'on final para el SVM con cad kernel. 
 
-            \begin{figure}[h!]
+            \begin{figure}[H]
                 \centering
                 \includegraphics[width = 0.45\linewidth]{Medias_group.png}
                 \includegraphics[width = 0.45\linewidth]{final_gruop.png}
@@ -366,16 +366,23 @@
 	
 		\subsection{K-Means}
 		
+		El paso inicial para utilizar el m\'etodo KMeans de sklearn es configurar el parámetro \textit{random\_state} el cual determina la generación de números aleatorios para la inicialización del centroide. De esta forma se puede asegurar que los resultados sean consistentes a trav\'es de múltiples ejecuciones. En dependencia de este valor podemos obtener distintos resultados a la hora de agrupar. Se hicieron pruebas para distintos valores de este par\'ametro, algunas de las cuales pueden ser encontradas en el directorio \textit{KMeans\_plots} del repositorio. Finalmente se decidi\'o tomar \textit{random\_seed = 45}.
+		
+		Luego, se aplican los m\'etodos del codo y la silueta para un rango de cl\'usters determinado, teniendo en cuenta ambos para poder escoger el n\'umero k \'optimo de cl\'usters. Adem\'as se grafican los datos despu\'es de ser agrupados para los mejores k. Se pueden encontrar para cada valor de \textit{random\_seed} todas las gr\'aficas generadas por los m\'etodos anteriores tambi\'en en el directorio \textit{KMeans\_plots}.
+		 
+		Finalmente, se toman los centroides de cada cl\'uster, 
+		se agrupan las caracter\'isticas correspondientes a cada dato seg\'un dichos cl\'usters, y se toma su promedio como representativo del grupo. 
+		
 		\subsubsection{Descubrir rasgos de caligraf\'ia a partir de rasgos de personalidad}
 		
-		\begin{figure}[hbt!]
+		\begin{figure}[H]
 			\centering
 			\includegraphics[width = 6cm]{ElbowM_Distortion_bf.png}
 			\includegraphics[width = 6cm]{ElbowM_Inertia_bf.png}
 			\caption{M\'etodo del codo para medidas distorsi\'on (izquierda) e inercia (derecha) con n\'umero de cl\'usters=[2, 14].}
 		\end{figure}
 	
-		\begin{figure}[hbt!]
+		\begin{figure}[H]
 			\centering
 			\includegraphics[width = 3.5cm]{silhouette_visualization_2_bf.png}
 			\includegraphics[width = 3.5cm]{silhouette_visualization_3_bf.png}
@@ -398,37 +405,58 @@
 			\caption{M\'etodo de la silueta con n\'umero de cl\'usters=[2, 14].}
 		\end{figure}
 		
-		\begin{figure}[hbt!]
+		\begin{figure}[H]
 			\centering
 			\includegraphics[width = 6cm]{SilhouetteM_bf.png}
 			\caption{M\'etodo de la silueta con n\'umero de cl\'usters=[2, 14].}
 		\end{figure}
 		
-		\begin{figure}[hbt!]
+		Teniendo en cuenta los resultados mostrados en las gr\'aficas anteriores se determin\'o que el n\'umero \'optimo de cl\'usters es k = 10. 
+		
+		\begin{figure}[H]
 			\centering
 			\includegraphics[width = 6cm]{Original_Data_2d_bf.png}
 			\includegraphics[width = 6cm]{Clustered_Data_2d_k10_seed45_bf.png}
 			\caption{Datos originales (izquierda) y datos despu\'es de aplicarles clustering (derecha) para k=10 en dos dimensiones.}
 		\end{figure}
 		
-		\begin{figure}[h!]
+		\begin{figure}[H]
 			\centering
 			\includegraphics[width = 6cm]{Original_Data_3d_bf.png}
 			\includegraphics[width = 6cm]{Clustered_Data_3d_k10_seed45_bf.png}
 			\caption{Datos originales (izquierda) y datos despu\'es de aplicarles clustering (derecha) para k=10 en tres dimensiones.}
 		\end{figure}
 		
+		Dado al tama\~no del dataset y la poca diversidad de los datos el modelo no es capaz de extraer muchas conclusiones. N\'otese que el vector promedio de features por cl\'uster es igual en todos excepto para el cl\'uster n\'umero 7. De este podemos saber que las personas con baja Moralidad y todos los dem\'as rasgos altos, tienden a escribir con m\'argenes anchos.
+		
+		\begin{center}
+			\begin{tabular}[H]{|c|c|c|}
+			\hline Cl\'uster & Promedio Big Five (centroides) & Promedio features \\  
+			\hline 0 & 58. 70. 91. 95. 79. & 0. 0. 1. 0. 0. \\
+			\hline 1 & 81. 74. 81. 78. 85. & 0. 0.  1.  0.  0. \\
+			\hline 2 & 86. 91. 88. 97. 89. & 0. 0.  1.  0.  0. \\
+			\hline 3 & 64. 94. 93. 97. 89. & 0.  0.  1.  0.  0.\\
+			\hline 4 & 80. 56. 75. 92. 91. & 0. 0. 1. 0. 0.\\
+			\hline 5 & 83. 71. 71. 88. 57. & 0. 0.  1.  0.  0.\\
+			\hline 6 & 58.  85.  78.  97. 105. & 0. 0. 1. 0. 0.\\
+			\hline 7 & 94. 92. 98. 86. 57. & 0. 0.  1.  0.  1.\\
+			\hline 8 & 96. 49. 75. 81. 60. & 0. 0.  1.  0.  0. \\
+			\hline 9 & 66. 76. 80. 94. 93. & 0.  0.  1.  0.  0.\\
+			\hline
+		\end{tabular}
+		\end{center}
+		
+		
 		\subsubsection{Descubrir rasgos de personalidad a partir de features}
     	
-    		\begin{figure}[hbt!]
+   		\begin{figure}[H]
     		\centering
     		\includegraphics[width = 6cm]{ElbowM_Distortion.png}
     		\includegraphics[width = 6cm]{ElbowM_Inertia.png}
     		\caption{M\'etodo del codo para medidas distorsi\'on (izquierda) e inercia (derecha) con n\'umero de cl\'usters=[2, 10].}
     	\end{figure}
-    	
-    	\newpage
-    	\begin{figure}[hbt!]
+
+    	\begin{figure}[H]
     		\centering
     		\includegraphics[width = 3.5cm]{silhouette_visualization_2.png}
     		\includegraphics[width = 3.5cm]{silhouette_visualization_3.png}
@@ -445,31 +473,50 @@
     		\caption{M\'etodo de la silueta con n\'umero de cl\'usters=[2, 10].}
     	\end{figure}
     	
-    	\begin{figure}[hbt!]
+    	\begin{figure}[H]
     		\centering
     		\includegraphics[width = 6cm]{SilhouetteM.png}
     		\caption{M\'etodo de la silueta con n\'umero de cl\'usters=[2, 10].}
     	\end{figure}
     	
-    	\begin{figure}[hbt!]
+    	Teniendo en cuenta los resultados mostrados en las gr\'aficas anteriores se determin\'o que el n\'umero \'optimo de cl\'usters es k = 7.
+    	
+    	\begin{figure}[H]
     		\centering
     		\includegraphics[width = 6cm]{Original_Data_2d.png}
     		\includegraphics[width = 6cm]{Clustered_Data_2d_k7_seed45.png}
     		\caption{Datos originales (izquierda) y datos despu\'es de aplicarles clustering (derecha) para k=7 en dos dimensiones.}
     	\end{figure}
     	
-    	\begin{figure}[hbt!]
+    	\begin{figure}[H]
     		\centering
     		\includegraphics[width = 6cm]{Original_Data_3d.png}
     		\includegraphics[width = 6cm]{Clustered_Data_3d_k7_seed45.png}
     		\caption{Datos originales (izquierda) y datos despu\'es de aplicarles clustering (derecha) para k=7 en tres dimensiones.}
     	\end{figure}
+    	
+    	\begin{tabular}[H]{|c|c|c|}
+    		\hline Cl\'uster & Promedio features (centroides) & Promedio Big Five  \\  
+    		\hline 0 & 0. 0.  1.  0. 0. & 73. 79. 84. 92. 87. \\
+    		\hline 1 & 0.  0.  1.  0.  1. & 69. 83. 84. 92. 88.\\
+    		\hline 2 &  1.  0.  1. 0.  1. & 75. 81. 83. 92. 85. \\
+    		\hline 3 & 0. 1. 1. 0. 1. & 74. 81. 83. 87. 90. \\
+    		\hline 4 & 1. 0.  1.  0.  1. & 74. 84. 84. 91. 87. \\
+    		\hline 5 &  0. -1. 1.  0.  1. & 78. 81. 85. 87. 79. \\
+    		\hline 6 & 0. 0. 1.  1. 0. & 80. 74. 82. 96. 83. \\
+    		\hline
+    	\end{tabular}
     
-    \newpage
+    
+   
+    
+   
+   
+    
     \section{Conclusiones y trabajo futuro}
         En este trabajo se realiz\'o un estudio profundo de aprendizaje de m\'aquinas aplicado a Grafolog\'ia, desde la consulta al Estado del Arte, Construcci\'on y Taggeo de un Dataset, extracci\'on de Features de las im\'agenes, entrenamiento de algoritmos y an\'alisis de resultados. A modo general el flujo de trabajo queda representado en la siguiente imagen: 
 
-        \begin{figure}[!h]
+        \begin{figure}[H]
             \centering
             \includegraphics[width = 0.5\linewidth]{photo_2023-05-29_02-40-00.jpg}
             \caption{Flujo del trabajo del Proyecto.}

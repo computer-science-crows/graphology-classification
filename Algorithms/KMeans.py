@@ -10,9 +10,9 @@ from sklearn.metrics import silhouette_score
 from yellowbrick.cluster import silhouette_visualizer
 
 # global parameters
-seed = 0
-nk = 11
-k = 6
+seed = 45
+nk = 14
+k = 7
 cwd = os.getcwd() + '/Algorithms/Kmeans_plots/'
 
 
@@ -51,7 +51,7 @@ def k_means():
     # plot_results_2d(features, k, seed)
     # plot_results_3d(features, k, seed)
 
-    # infered_results(features, data, k, seed)
+    infered_results(features, data, k, seed)
 
 
 def elbow_method(data, nk, seed):
