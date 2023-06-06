@@ -100,10 +100,8 @@ def plot_results_2d(data, k, seed):
     df = pca.fit_transform(data)
     df.shape
 
-    # plotting unclustered data
-    for i in range(len(df)):
-        plt.scatter(df[:, 0], df[:, 1])
-    plt.savefig(cwd + 'Original_Data_2d')
+    #
+    plt.scatter(df[:, 0], df[:, 1])
     plt.show()
 
     # initialize the class object
@@ -142,13 +140,11 @@ def plot_results_3d(data, k, seed):
     # building 3d figure
     fig = plt.figure()
     ax = plt.axes(projection='3d')
-    print(len(df))
 
-    # # plotting unclustered data
-    # for i in range(len(df)):
-    #     ax.scatter3D(df[:, 0], df[:, 1], df[:, 2], c=df[:, 2], cmap='Greens')
-    # plt.savefig(cwd + 'Original_Data_3d')
-    # plt.show()
+    # plotting unclustered data
+    ax.scatter3D(df[:, 0], df[:, 1], df[:, 2], c=df[:, 2], cmap='Greens')
+    plt.savefig(cwd + 'Original_Data_3d')
+    plt.show()
 
     # initialize the class object
     kmeans = KMeans(n_clusters=k, n_init='auto',
@@ -162,6 +158,9 @@ def plot_results_3d(data, k, seed):
 
     # getting the Centroids
     centroids = kmeans.cluster_centers_
+
+    fig = plt.figure()
+    ax = plt.axes(projection='3d')
 
     colors = plt.cm.rainbow(np.linspace(0, 1, k))
 
