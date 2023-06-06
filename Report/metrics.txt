@@ -1,0 +1,33 @@
+Accuracy : 0.07961783439490445   Categories: 2   BigFive: Neuroticism   kernel: Lineal
+
+Accuracy: 0.20063694267515925  Categories: 2   BigFive: Extroversion   kernel: Lineal
+
+Accuracy: 0.1910828025477707  Categories: 2   BigFive: Experience Opennes  kernel: Lineal
+
+Accuracy: 0.35987261146496813  Categories: 2   BigFive: Simpaty  kernel: Lineal
+
+Accuracy: 0.4140127388535032  Categories: 2   BigFive: Morality  kernel: Lineal
+
+========================================================================================================
+Accuracy : 0.14012738853503184   Categories: 2   BigFive: Neuroticism   kernel: Polinomial
+
+Accuracy: 0.21019108280254778  Categories: 2   BigFive: Extroversion   kernel: Polinomial
+
+Accuracy: 0.1942675159235669  Categories: 2   BigFive: Experience Opennes  kernel: Polinomial
+
+Accuracy: 0.535031847133758  Categories: 2   BigFive: Simpaty  kernel: Polinomial
+
+Accuracy: 0.37898089171974525  Categories: 2   BigFive: Morality  kernel: Polinomial
+
+========================================================================================================
+Accuracy : 0.14331210191082802   Categories: 2   BigFive: Neuroticism   kernel: RBF
+
+Accuracy: 0.21337579617834396  Categories: 2   BigFive: Extroversion   kernel: RBF
+
+Accuracy: 0.1942675159235669  Categories: 2   BigFive: Experience Opennes  kernel: RBF
+
+Accuracy: 0.4968152866242038  Categories: 2   BigFive: Simpaty  kernel: RBF
+
+Accuracy: 0.37898089171974525  Categories: 2   BigFive: Morality  kernel: RBF
+
+========================================================================================================

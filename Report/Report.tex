@@ -21,9 +21,9 @@
         La grafología es una técnica que estudia las características psicológicas de las personas a través de su escritura. 
         En algunos centros laborales se utilizan este tipo de análisis para determinar cuando contratar o no a alguien y se emplea también 
         para analizar a criminales y en el prceso de determinar trastornos en personas. Esta tarea realizada por expertos,
-        psicólogos y grfólogos, resulta complicada y los resultados están numerosas veces sujetos a la perspectiva de quien los analiza. La propuesta de este trabajo es 
-        utilizar algoritmos de Aprendizaje Máquina para automáticamente poder predecir características psicológicas de un individuo a partir de un fragmento de su escritura. 
-        Utilizaremos un conjunto de algoritmos de ML como: CNN, SVM y DT a modo comparativo para el análisis grafológico. 
+        psicólogos y grfólogos, resulta complicada y los resultados están, numerosas veces, sujetos a la perspectiva de quien los analiza. La propuesta de este trabajo es 
+        utilizar algoritmos de Aprendizaje de Máquina para automáticamente poder predecir características psicológicas de un individuo a partir de un fragmento de su escritura. 
+        Utilizaremos un conjunto de algoritmos de ML como: CNN(Convolutional Neural Network), SVM(Support Vector Machine) y DT(Decision Tree) a modo comparativo para el análisis grafológico. 
         Se propone la creaci\'on de una base de datos de im\'agenes con escritura a mano, as\'i como su uso para entrenar y comparar algunos modelos de Aprendizaje de M\'aquinas para predecir la personalida bas\'andonos en el Test de los Cinco Grandes(Big Five).
     \end{abstract}
     
@@ -89,7 +89,7 @@
 
     \section{Creaci\'on de la Base de Datos}
 
-        La propuesta es crear nuestro propio dataset, para ello fueron encuestadas 93 personas, a las que se les pidi\'on que escribiesen un texto 
+        La propuesta es crear nuestro propio dataset, para ello fueron encuestadas 71 personas, a las que se les pidi\'o que escribiesen un texto 
         en espa\~nol y se les realiz\'o el test de personalidad BigFive \cite{23}. \\ 
 
         Las hojas manuscritas fueron escaneadas y a las im\'agenes se les aplic\'o un preprocesado para llevarlas escala de grises y finalmente a binario con un nivel de tolerancia de 180. Adem\'as se 
@@ -106,12 +106,12 @@
         \subsection{Interlineado} 
 
             Para el interlineado se analizan dos clasificaciones posibles: Interlineado amplio (LINESPACE\_SEPARETED) e Interlineado peque\~no (LINESPACE\_CROWDED). Para encontrar el interlineado se utiliz\'o la t\'ecnica del perfil 
-            de proyeci\'on vertical suavizado(SPR) \cite{20}, esto permite separar las zonas de texto y espacios analizando los extremos del SPR, para las im\'agenes segmentadas es simple con este algoritmo determinar donde est\'a el texto correspondiente a la l\'inea y los espcaios superior e inferior
+            de proyeci\'on vertical suavizado(SPR) \cite{20}, esto permite separar las zonas de texto y espacios analizando los extremos del SPR, para las im\'agenes segmentadas es simple con este algoritmo determinar donde est\'a el texto correspondiente a la l\'inea y los espacios superior e inferior
             correspondientes al interlineado, as\'i se puede determinar si una l\'inea est\'a muy unida a sus adyacentes considerando la proporci\'on de p\'ixeles de foreground (pixeles negros correspondientes a texto) que existen en 
             las regiones identificadas como espacio.
 
-            Para analizar los SPR se separa la imagen en regiones vertiales de tema\~no 5\% del ancho de la imagen, se hace el SPR de cada uno, se determonan las regiones de texto y espacio \cite{22} y se calcula la densidad 
-            de p\'ixeles de foreground en los espacios . Finalmente se promedian los resultados de densidades para cada secci\'on vertical para determira si la l\'inea est\'a muy separada o muy pegada a sus adyacentes. 
+            Para analizar los SPR se separa la imagen en regiones verticales de tama\~no 5\% del ancho de la imagen. Luego, se hace el SPR de cada uno, se determinan las regiones de texto y espacio \cite{22} y se calcula la densidad 
+            de p\'ixeles de foreground en los espacios. Finalmente, se promedian los resultados de densidades para cada secci\'on vertical, para determinar si la l\'inea est\'a muy separada o muy pegada a sus adyacentes. 
 
             \begin{figure}[!h]
                 \centering
@@ -120,9 +120,9 @@
             \end{figure}
         \subsection{Margen} 
         
-            Para determinar el margen se pueden considerar tanto los m\'argenes superior e inferior como los m\'argenes laterales \cite{21}, para nuestro Dataset, como las im\'agenes son l\'ineas manuscritas no tiene sentido analizar los m\'argenes superior e inferior, por tanto solo 
+            Para determinar el margen se pueden considerar tanto los m\'argenes superior e inferior como los m\'argenes laterales \cite{21}. Para nuestro Dataset, como las im\'agenes son l\'ineas manuscritas, no tiene sentido analizar los m\'argenes superior e inferior. Por tanto, solo 
             se clasifica el margen lateral izquierdo en cuanto a su ancho como: Margen ancho (BIG\_MARGIN) y margen estrecho (SMALL\_MARGIN). Para esto se analiz\'o el perfil de proyeccci\'on (PR) horizontal de cada im\'agen tomando el rango del PR desde el elemento 0 hasta que el valor del PR 
-            sea mayo que una tolerancia espec\'ificada, es decir mientras que la densidad de p\'ixeles en el foreground para cada columna de la imagen sea menor que un valor relativo al largo de la iamgen. 
+            sea mayor que una tolerancia especificada; es decir, mientras que la densidad de p\'ixeles en el foreground para cada columna de la imagen sea menor que un valor relativo al largo de la imagen. 
 
             \begin{figure}[!h]
                 \centering
@@ -131,18 +131,18 @@
             \end{figure}
         \subsection{Espaciado} 
 
-            El espaciado so los espacios dejados entre caracteres y palabras en una misma l\'inea, para clasificar el espaciado se realiz\'o a cada im\'agen un trabajo con filtros morfol\'ogicos, seleccionando un kernel horizontal para realizar una convoluci\'on con la imagen 
-            que permita unificar los trazos de todo lo que est\'e escrito unido de una misma palabra para de este modo separar las palabras enmarc\'andolas en recuadros, as\'i el espaciado se puede determinar como la distancia promedio entre los recuadros.
+            El espaciado, son los espacios dejados entre caracteres y palabras en una misma l\'inea. Para clasificar el espaciado se realiz\'o a cada imagen un trabajo con filtros morfol\'ogicos; seleccionando un kernel horizontal para realizar una convoluci\'on con la imagen 
+            que permita unificar los trazos de todo lo que est\'e escrito unido de una misma palabra para de este modo separar las palabras enmarc\'andolas en recuadros. As\'i el espaciado se puede determinar como la distancia promedio entre los recuadros.
 
             \begin{figure}[!h]
                 \centering
                 \includegraphics[width = 0.5\linewidth]{Espaces.png}
-                \caption{Recuedros que bordean al texto escrito sin espacios.}
+                \caption{Recuadros que bordean al texto escrito sin espacios.}
             \end{figure}
 
         \subsection{Inclinaci\'on de la L\'inea}
-            Para determinar la inclinaci\'on de la letra en una l\'inea se realiz\'o el procedimiento descrito en \cite{20}, rotando la im\'agen desde $-30^{\circ}$ hasta $30^{\circ}$, 
-            determinando para cu\'al de los valores de la rotaci\'on la cantidad de p\'ixeles de foreground es m\'axima para la zona central de la imagen. Para los \'angulos comprendidos 
+            Para determinar la inclinaci\'on de la letra en una l\'inea se realiz\'o el procedimiento descrito en \cite{20}, rotando la im\'agen desde $-30^{\circ}$ hasta $30^{\circ}$. 
+            Determinando para cu\'al de los valores de la rotaci\'on la cantidad de p\'ixeles de foreground es m\'axima para la zona central de la imagen. Para los \'angulos comprendidos 
             entre $ [-30; -5) $ se dice que la linea base es Ascendente (ASCENDING), entre $[-5; 5]$ es Nivelada (LEVELED) y entre $(5; 30]$ es Descendente (DESCENDING). 
 
             \begin{figure}[!h]
@@ -158,12 +158,225 @@
             izquierda (MODERATE\_LEFT), as\'i como sus equivalentes hacia la derecha (EXTREME\_RIGHT) y (MODERATE\_RIGHT) respectivamente y la escritura sin inclinaciones (VERTICAL). 
             Para extraer este feature se utiliza el perfil de proyecci\'on (PR) vertical rotando la imagen en \'angulos entre $-20^{\circ}$ y $20^{\circ}$, buscando el \'angulo que maximice
             la suma del PR normalizado, tal y como se plantea en \cite{20}.
-\section{Algoritmos Utilizados}
-\subsection{KNN}
-\subsection{CNN}
-\subsection{K-Means}
-\subsection{SVM}
-\section{Resultados}
+
+    \section{Algoritmos Utilizados}
+        Para la investigsci\'on sobre Grafolog\'ia con ML se utilizaron a modo comparativo los algoritmos m\'as citados en el Estado del Arte de este tema. 
+        Para probar cada uno de ellos se dividi\'o el dataset en  conjuntos: Entrenamiento/Test y Validaci\'on con tama\~no $75\%$ y $25\%$ de las personas que conforman el dataset respectivamente.
+        Primero se seleccion\'o el conjunto de personas para hacer la validaci\'on y se separaron las im\'agenes de sus escritures, features extra\'idos y resultados del test BigFive. Luego a los restantes datos del dataset 
+        se les aplic\'o k-fold para dividir los datos de tests y entrenamiento.  
+        
+        \subsection{KNN}
+            Para el algoritmo de KNN se utilizaron los features extra\'idos de las im\'agenes y los resultados del big five para entrenar un modelo \texttt{KNeighborsClassifier} del m\'odulo sklearn de pyrhon. 
+            Previo al entrenamiento se reescalaron los datos de la entrada utilizando \texttt{StandardScaler}. El valor de k fijado como cantidad de vecinos cercanos a fijar fue 7, con el cual se obtuvo los mejores resultados en 
+            la etapa de entrenamiento/test del algoritmo previo a la validaci\'on final. Cada caracter\'istica se predijo por separado y se emple\'o una agrupaci\'on en intervalos de a 10.
+        
+        \subsection{CNN}
+            En la Red Neuronal Convolucional se utiliz\'o directamente las matrices de pixeles de las im\'agenes de escrituras para entrenar el modelo. 
+            Primeramente se hizo un reescalado de la imagen para que todas tuviesen la misma resoluci\'on y luego se utilizaron en el entrenamiento de una CNN.
+            Para la \'ultima capa de la CNN se tienen 5 neuronas, una por cada uno de los rasgos del BigFive a predecir.\\
+            
+            Se probaron con varias ideas de entrenamiento, variando las dimensiones de las im\'agenes para determinar si la calidad afecta en mayor o menor medida 
+            la clasificaci\'on. No obstante teniendo en cuanta las caracter\'isticas del dataset, en cuanto al vol\'umen de im\'agenes el modelo con Redes Neuronales es propenso 
+            a overfit con pocas im\'agenes. 
+
+        \subsection{K-Means}
+            El n\'umero de cl\'usters K, que mejor se ajuste a la situaci\'on se determin\'o con el m\'etodo del codo. Se entren\'o el 
+            modelo \texttt{KMeans} de sklearn.clusters con los datos procedentes de los features extra\'idos de las im\'agenes y los resultados del 
+            test BigFive.
+        
+        \subsection{SVM}
+            Para la m\'aquina de soporte vectorial, como las clasificaciones seg\'un BigFive para cada uno de los rasgos punt\'ua con un valor de 0 a 120, y SVM separa por categor\'ia,
+            reescalamos los resultados deo BigFive de 0 a 11, agrupando los valores del big five de 10 en 10. Como adem\'as los rasgos del Big Five son independientes, si con la grafolog\'ia fuera posible determinarlos, su valor depender\'ia solo de los rasgos de las letrasy no uno de otro.
+            Por tanto se cre\'o una SVM por cada uno de los 5 rasgos de Big Five de modo que permita clasificar para cada persona los niveles de cada caracter\'istica en que se encuentra. Para esto se enten\'o el modelo \texttt{SVC} de sklearn.svm con los features extra\'idos de las fotos y con uno de los rasgos del BgFive en cada caso.
+            Los datos fueron reescalados usando \texttt{StandardScaler} de sklearn.preprocessing.
+            Como la clasificaci\'on es de m\'as de 2 categor\'ias se emple\'o una estrategia de clasificaci\'on de one-versus-one (ovo) y se prob\'o el enfoque con los kernels: lineal, polinomial y rbf. De igual modo se hizo un an\'alisis seprando los rasgos en solo 2 categorias, Alto (1) y Bajo (0) y un an\'alisis final intentando predecir 
+            los 5 rasgos en simult\'aneo
+
+    \section{Resultados}
+            \subsection{KNN}
+                En la evaluaci\'on del KNN se tuvieron en cuenta las m\'etricas de \texttt{acurracy} y \texttt{precision}. Para cada uno de los rasgos por separado se
+                obtuvo en la etapa de entrenamiento/test los sigientes valores promedio para esas m\'etricas luego de utilizar un 5-Fold: \\
+
+                \begin{tabular}[h!]{|c|c|c|}
+
+                    \hline Categor\'ia & Accuracy promedio & Precisi\'on promedio \\  
+                    \hline Neuroticismo & 0.543033653236376 & 0.43342082642200563 \\
+                    \hline Extroversio\'n& 0.5431921954931721 & 0.5473437650759438 \\
+                    \hline Apertura a Experiencias & 0.41551811609520994 & 0.43320995174546806 \\
+                    \hline Simpat\'ia& 0.8458440789751829 & 0.42945218290696635 \\
+                    \hline Moralidad & 0.7041812877859046 & 0.5274896102039315 \\
+                    \hline
+                \end{tabular}
+
+                \begin{figure}[h!]
+                    \centering
+                    \includegraphics[width = 0.7\linewidth]{bar_knn.png}
+                \end{figure}
+
+                Posteriormente en la etapa de validaci\'on los resultados que se obtienen para \texttt{acurracy} y \texttt{precision} de cada rasgo son: 
+
+                \begin{tabular}[h!]{|c|c|c|}
+
+                    \hline Categor\'ia & Accuracy & Precisi\'on \\  
+                    \hline Neuroticismo             & 0.910828025477707  & 0.4798657718120805 \\
+                    \hline Extroversio\'n           & 0.4681528662420382 & 0.37875375375375375 \\
+                    \hline Apertura a Experiencias  & 0.2611464968152866 & 0.5211134453781512 \\
+                    \hline Simpat\'ia               & 0.8885350318471338 & 0.45737704918032784 \\
+                    \hline Moralidad                & 0.9140127388535032 & 0.46141479099678456 \\
+                    \hline
+                \end{tabular}
+            
+                \begin{figure}[h!]
+                    \centering
+                    \includegraphics[width = 0.7\linewidth]{bar2_knn.png}
+                \end{figure}
+
+            \subsection{CNN} 
+                Para la Red Neuronal Convolucional se analizaron los rasgos del BigFive agrupando los valores de cada caracter\'istica en rangos de a 10. 
+                Se tuvieron en cuenta para la evaluaci\'on del modelo las m\'etricas: \texttt{mean absolute error} (MAE) y el \texttt{accuracy}.
+                Los resultados para cada tama\~no de entrada obtenidos son los siguientes: \\
+
+                Usando 3 capas de convolucion, reajuste de las im\'agenes a 32x32:\\
+                \begin{itemize}
+                    \item[] MAE para caracter\'istica 0: 1.3867782231034904 
+                    \item[] MAE para caracter\'istica 1: 1.304610701813095 
+                    \item[] MAE para caracter\'istica 2: 0.9960057525342452
+                    \item[] MAE para caracter\'istica 3: 1.356362326391812
+                    \item[] MAE para caracter\'istica 4: 1.3710135627980433
+                \end{itemize}
+                
+                Con un accuracy igual a 76.048\%.\\
+
+                Si se entrena con exactamente las mismas caracter\'isticas pero con im\'agenes ajustadas a 64x64, para mayor calidad, obtenemos los siguientes resultados:
+                \begin{itemize}
+                    \item[] MAE para caracter\'istica 0: 1.2410950697244811
+                    \item[] MAE para caracter\'istica 1: 1.0932612272971434
+                    \item[] MAE para caracter\'istica 2: 0.9566778752995634
+                    \item[] MAE para caracter\'istica 3: 1.0583139525519476
+                    \item[] MAE para caracter\'istica 4: 1.2694159266592442
+                \end{itemize}
+                
+                Con un accuracy igual a 75.901\%.\\
+
+                Haci\'endolo con dimensiones 128x128:
+                \begin{itemize}
+                    \item[] MAE para caracter\'istica 0: 1.308632514485911
+                    \item[] MAE para caracter\'istica 1: 1.107600970286519
+                    \item[] MAE para caracter\'istica 2: 0.8781356299973996
+                    \item[] MAE para caracter\'istica 3: 1.008931401132167
+                    \item[] MAE para caracter\'istica 4: 1.2417590243606276
+                \end{itemize}
+                
+                Con un accuracy igual a 75.606\%.\\
+                
+                Donde las caracter\'isticas 1,2,3,4,5 son Neuroticismo, Extroversi\'on, Apertura a Experiencias, 
+                Simpat\'ia y Moralidad respectivamente.
+            
+            \subsection{SVM} 
+            Para SVM con grupos de rango 10 probando con los tres tipos de kernel disponibles en \texttt{sklearn.SVM} en la etapa de 
+            entrenamiento/test, haciendo 5-Fold, se obtuvieron paracada razgo del Big Five los siguientes preomedios para las medias de
+            \texttt{accuracy} y \texttt{precission}.
+
+            \begin{figure}[h!]
+                \centering
+                \includegraphics[width = 0.3\linewidth]{Medias_Lineal10.png}
+                \includegraphics[width = 0.3\linewidth]{Medias_Polinomial10.png}
+                \includegraphics[width = 0.3\linewidth]{Medias_rbf10.png}
+
+            \end{figure}
+
+            Todas por debajo del 50\%, para estos modelos en la etapa de validaci\'on se obtuvieron los 
+            siguientes valores de \texttt{accuracy} y las siguientes gr\'aficas para cada kernel. \\ 
+
+            \begin{tabular}[h!]{|c|c|c|c|}
+
+                \hline Categor\'ia & Accur (Lineal) & Accur (Polinomial) & Accur (RBF) \\  
+                \hline Neuroticismo             & 0.0796 & 0.1401  &  0.1433\\
+                \hline Extroversio\'n           & 0.2006 & 0.2101  &  0.2133\\
+                \hline Apertura a Exp  & 0.1910 & 0.1942  &  0.1942\\
+                \hline Simpat\'ia               & 0.3598 & 0.5350  &  0.4968\\
+                \hline Moralidad                & 0.4140 & 0.3789  &  0.3789\\
+                \hline
+            \end{tabular}
+
+            \begin{figure}[h!]
+                \centering
+                \includegraphics[width = 0.3\linewidth]{final_lineal10.png}
+                \includegraphics[width = 0.3\linewidth]{final_polinomial10.png}
+                \includegraphics[width = 0.3\linewidth]{final_rbf10.png}
+
+            \end{figure}
+
+            Adem\'as de este enfoque se trat\'o tambi\'en con una clasificaci\'on en dos categor\'ias, Alta( $>~ 80$ ) y Baja( $<= ~80$ ) para
+            cada rasgo del BigFive y se obtuvieron resultados que var\'ian entre en 50\% y el 84\% de \texttt{accuracy} en la etapa 
+            de entrenamiento/test del modelo tal y como muestran las gr\'aficas:\\ 
+
+            \begin{figure}[h!]
+                \centering
+                \includegraphics[width = 0.3\linewidth]{Medias_Lineal.png}
+                \includegraphics[width = 0.3\linewidth]{Medias_Polinomial.png}
+                \includegraphics[width = 0.3\linewidth]{Medias_rbf.png}
+
+            \end{figure}
+
+            En la etapa de validaci\'on se obtuvieron los siguientes valores de \texttt{accuracy}: \\ 
+
+            \begin{tabular}[h!]{|c|c|c|c|}
+
+                \hline Categor\'ia & Accur (Lineal) & Accur (Polinomial) & Accur (RBF) \\  
+                \hline Neuroticismo             & 0.9617 & 0.9171  &  0.9171\\
+                \hline Extroversio\'n           & 0.4936 & 0.4681  &  0.4490\\
+                \hline Apertura a Exp           & 0.8152 & 0.7898  &  0.7993\\
+                \hline Simpat\'ia               & 0.9171 & 0.9171  &  0.9108\\
+                \hline Moralidad                & 0.9171 & 0.8885  &  0.9171\\
+                \hline
+            \end{tabular}
+
+          
+            \begin{figure}[h!]
+                \centering
+                \includegraphics[width = 0.3\linewidth]{final_lineal.png}
+                \includegraphics[width = 0.3\linewidth]{final_polinomial.png}
+                \includegraphics[width = 0.3\linewidth]{final_rbf.png}
+
+            \end{figure}
+
+            Por \'ultimo se trat\'o de predecir en simult\'aneo los 5 rasgos, para ello se tom\'o el vetor binario resultante de 
+            clasificar cada categor\'ia como alta o baja t se convirti\'o a decimal, con lo que se tienen $2^5$ grupos posibles, como era de esperar 
+            debido a las dimensiones del dataset se obtuvieron bajos resultados para este enfoque debido a underfit, las gr\'aficas de las etapas entrenamiento/test y 
+            validaci\'on se muestran a continuaci\'on, igual que los valores de \texttt{accuracy} en la etapa de validaci\'on final para el SVM con cad kernel. 
+
+            \begin{figure}[h!]
+                \centering
+                \includegraphics[width = 0.45\linewidth]{Medias_group.png}
+                \includegraphics[width = 0.45\linewidth]{final_gruop.png}
+
+            \end{figure}
+
+            \begin{itemize}
+                \item [] Accuracy kernel lineal: 0.2365
+                \item [] Accuracy kernel polinomial: 0.3089
+                \item [] Accuracy kernel rbf: 0.2292
+            \end{itemize}
+
+    \section{Resumen}
+        En este trabajo se realiz\'o un estudio profundo de Machine Learnin aplicado a Grafolog\'ia, desde la consulta al Estado del Arte, Construcci\'on y Taggeo de 
+        un Dataset, estracci\'on de Features de las im\'agenes, entrenamiento de Algoritmos de ML y an\'alisis de resultados. A modo general el flujo de tranbajo queda representado 
+        en la siguiente imagen: 
+
+        \begin{figure}[!h]
+            \centering
+            \includegraphics[width = 0.5\linewidth]{photo_2023-05-29_02-40-00.jpg}
+            \caption{Flujo del trabajo del Proyecto.}
+        \end{figure}
+
+        Con los algoritmos empleados pudimos determinar que realmente la grafolog\'ia no puede determinar de 
+        forma certera la psicolog\'ia de una persona. Los modelos utilizados rondan el 50\% de efectividad en sus predicciones, 
+        lo cual dista de ser una clasificaci\'on fiable. De los modelos utilizados el SVM con clasificaciones en alto y bajo es el que mejores 
+        resultados ofreci\'o, en su mayor\'ia sobre el 80\% - 90\% de fiabilidad, pero igual de distante en identificar caracter\'isticas como la extroversi\'on.\\ 
+
+        Se propone como idea de investigaci\'on futura la construcci\'on de un dataset de mayores dimensiones para probar estas y otras ideas de ML sobre grafolog\'ia, que 
+        permitan que los modelos no hagan overfit por la escac\'es de datos respecto al amplio n\'umero de categor\'ias para clasificar. 
 
 \begin{thebibliography}{99}
     %-----------------------------------------------------------------------------------
