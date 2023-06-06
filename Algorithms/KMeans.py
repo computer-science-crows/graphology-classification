@@ -193,8 +193,8 @@ def infered_results(data, features, k, seed):
         c = np.asarray(cluster)
         avg_feat = []
         for i in range(5):
-            avg_feat.append(np.round(np.sum(c[:, i]) / len(c)))
-        avg_features_per_cluster.append(avg_feat)
+            avg_feat.append(np.sum(c[:, i]) / len(c))
+        avg_features_per_cluster.append(np.rint(avg_feat))
 
     for i in range(k):
         print(f'{avg_big_five[i]} : {avg_features_per_cluster[i]}')
