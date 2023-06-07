@@ -5,6 +5,7 @@
 \usepackage{multicol}
 \usepackage[pdftex]{hyperref}
 \usepackage{float}
+\usepackage{hyperref} % For hyperlinks in the PDF
 
 \hypersetup{colorlinks,%
 	    citecolor=black,%
@@ -237,7 +238,7 @@
                 \end{figure}
 
             \subsection{CNN} 
-                Para la Red Neuronal Convolucional se analizaron los rasgos del BigFive agrupando los valores de cada caracter\'istica en rangos de a 10. 
+                Para la Red Neuronal Convolucional se analizaron los rasgos del BigFive agrupando los valores de cada caracter\'istica en bajo y alto nivel. 
                 Se tuvieron en cuenta para la evaluaci\'on del modelo las m\'etricas: \texttt{mean absolute error} (MAE) y el \texttt{accuracy}.
                 Los resultados para cada tama\~no de entrada obtenidos son los siguientes: \\
 
@@ -379,7 +380,7 @@
 			\centering
 			\includegraphics[width = 6cm]{ElbowM_Distortion_bf.png}
 			\includegraphics[width = 6cm]{ElbowM_Inertia_bf.png}
-			\caption{M\'etodo del codo para medidas distorsi\'on (izquierda) e inercia (derecha) con n\'umero de cl\'usters=[2, 14].}
+			\caption{M\'etodo del codo para medidas distorsi\'on (izquierda) e inercia (derecha) con n\'umero de cl\'usters $k\in[2, 14]$.}
 		\end{figure}
 	
 		\begin{figure}[H]
@@ -402,13 +403,13 @@
 			
 			\includegraphics[width = 3.5cm]{silhouette_visualization_14_bf.png}
 			
-			\caption{M\'etodo de la silueta con n\'umero de cl\'usters=[2, 14].}
+			\caption{Visualizaci\'on de la silueta para todo n\'umero de cl\'uster $k\in[2, 14]$.}
 		\end{figure}
 		
 		\begin{figure}[H]
 			\centering
 			\includegraphics[width = 6cm]{SilhouetteM_bf.png}
-			\caption{M\'etodo de la silueta con n\'umero de cl\'usters=[2, 14].}
+			\caption{M\'etodo de la silueta con n\'umero de cl\'usters $k\in[2, 14]$.}
 		\end{figure}
 		
 		Teniendo en cuenta los resultados mostrados en las gr\'aficas anteriores se determin\'o que el n\'umero \'optimo de cl\'usters es k = 10. 
@@ -427,9 +428,10 @@
 			\caption{Datos originales (izquierda) y datos despu\'es de aplicarles clustering (derecha) para k=10 en tres dimensiones.}
 		\end{figure}
 		
-		Dado al tama\~no del dataset y la poca diversidad de los datos el modelo no es capaz de extraer muchas conclusiones. N\'otese que el vector promedio de features por cl\'uster es igual en todos excepto para el cl\'uster n\'umero 7. De este podemos saber que las personas con baja Moralidad y todos los dem\'as rasgos altos, tienden a escribir con m\'argenes anchos.
+		Dado al tama\~no del dataset y la poca diversidad de los datos el modelo no es capaz de extraer grandes conclusiones. N\'otese que el vector promedio de features por cl\'uster es igual en todos excepto para el cl\'uster n\'umero 7. De este podemos saber que las personas con baja Moralidad y todos los dem\'as rasgos con valores altos, tienden a escribir con m\'argenes anchos.
 		
-		\begin{center}
+		\begin{figure}[H]
+			\centering
 			\begin{tabular}[H]{|c|c|c|}
 			\hline Cl\'uster & Promedio Big Five (centroides) & Promedio features \\  
 			\hline 0 & 58. 70. 91. 95. 79. & 0. 0. 1. 0. 0. \\
@@ -444,7 +446,8 @@
 			\hline 9 & 66. 76. 80. 94. 93. & 0.  0.  1.  0.  0.\\
 			\hline
 		\end{tabular}
-		\end{center}
+			\caption{Tabla con los resultados al aplicar clustering para k=10. Se muestran las puntuaciones promedio de los datos referentes al big five y los features en cada cl\'uster de la forma (Neuroticismo. Extroversi\'on. Apertura a Experiencias. Simpat\'ia. Moralidad.) y (Inclinaci\'on de la Letra. Inclinaci\'on de la L\'inea. Espaciado. Interlineado. Margen.) respectivamente.}
+		\end{figure}
 		
 		
 		\subsubsection{Descubrir rasgos de personalidad a partir de features}
@@ -453,15 +456,19 @@
     		\centering
     		\includegraphics[width = 6cm]{ElbowM_Distortion.png}
     		\includegraphics[width = 6cm]{ElbowM_Inertia.png}
-    		\caption{M\'etodo del codo para medidas distorsi\'on (izquierda) e inercia (derecha) con n\'umero de cl\'usters=[2, 10].}
+    		\caption{M\'etodo del codo para medidas distorsi\'on (izquierda) e inercia (derecha) con n\'umero de cl\'usters $k\in[2, 10]$.}
     	\end{figure}
 
     	\begin{figure}[H]
     		\centering
+    		
     		\includegraphics[width = 3.5cm]{silhouette_visualization_2.png}
     		\includegraphics[width = 3.5cm]{silhouette_visualization_3.png}
     		\includegraphics[width = 3.5cm]{silhouette_visualization_4.png}
-    		
+   		\end{figure}
+   		
+   		\begin{figure}[H]
+   			\centering
     		\includegraphics[width = 3.5cm]{silhouette_visualization_5.png}
     		\includegraphics[width = 3.5cm]{silhouette_visualization_6.png}
     		\includegraphics[width = 3.5cm]{silhouette_visualization_7.png}
@@ -470,13 +477,13 @@
     		\includegraphics[width = 3.5cm]{silhouette_visualization_9.png}
     		\includegraphics[width = 3.5cm]{silhouette_visualization_10.png}
     		
-    		\caption{M\'etodo de la silueta con n\'umero de cl\'usters=[2, 10].}
+    		\caption{Visualizaci\'on de la silueta para todo n\'umero de cl\'uster $k\in[2, 10]$.}
     	\end{figure}
     	
     	\begin{figure}[H]
     		\centering
     		\includegraphics[width = 6cm]{SilhouetteM.png}
-    		\caption{M\'etodo de la silueta con n\'umero de cl\'usters=[2, 10].}
+    		\caption{M\'etodo de la silueta con n\'umero de cl\'usters $k\in[2, 10]$.}
     	\end{figure}
     	
     	Teniendo en cuenta los resultados mostrados en las gr\'aficas anteriores se determin\'o que el n\'umero \'optimo de cl\'usters es k = 7.
@@ -495,7 +502,11 @@
     		\caption{Datos originales (izquierda) y datos despu\'es de aplicarles clustering (derecha) para k=7 en tres dimensiones.}
     	\end{figure}
     	
-    	\begin{tabular}[H]{|c|c|c|}
+    	Al igual que en el enfoque anterior, se puede extraer poca informaci\'on de los cl\'usteres formados, viendose poca diversidad en el dataset, por ejemplo aqu\'i todas las personas escriben con espaciado estrecho. De forma general se puede inferir que las personas con interlineado peque\~no tienden a un alto neuroticismo y una baja extroversi\'on; y las personas que escriben con m\'argenes anchos, son usualmente poco neur\'oticas y muy extrovertidas, abiertas y simp\'aticas.
+    	
+    \begin{figure}[H]
+    	\centering
+    		\begin{tabular}[H]{|c|c|c|}
     		\hline Cl\'uster & Promedio features (centroides) & Promedio Big Five  \\  
     		\hline 0 & 0. 0.  1.  0. 0. & 73. 79. 84. 92. 87. \\
     		\hline 1 & 0.  0.  1.  0.  1. & 69. 83. 84. 92. 88.\\
@@ -506,6 +517,8 @@
     		\hline 6 & 0. 0. 1.  1. 0. & 80. 74. 82. 96. 83. \\
     		\hline
     	\end{tabular}
+    \caption{Tabla con los resultados al aplicar clustering para k=7. Se muestran las puntuaciones promedio de los datos referentes a los features y el big five en cada cl\'uster de la forma (Inclinaci\'on de la Letra. Inclinaci\'on de la L\'inea. Espaciado. Interlineado. Margen.) y (Neuroticismo. Extroversi\'on. Apertura a Experiencias. Simpat\'ia. Moralidad.) respectivamente.}
+    \end{figure}
     
     
    
@@ -527,7 +540,14 @@
         resultados ofreci\'o, en su mayor\'ia sobre el 80\% - 90\% de fiabilidad, pero igual distante en identificar caracter\'isticas como la extroversi\'on.\\ 
 
         Se propone como idea de investigaci\'on futura la construcci\'on de un dataset de mayores dimensiones para probar estas y otras ideas de aprendizaje de m\'aquinas sobre grafolog\'ia, que permitan que los modelos no hagan overfit por la escas\'es de datos respecto al amplio n\'umero de categor\'ias para clasificar. 
-
+		
+		\section{Repositorio del proyecto}
+		\begin{center}
+			\small \url{https://github.com/computer-science-crows/graphology-classification}
+		\end{center}
+		
+		\normalsize
+		
 \begin{thebibliography}{99}
     %-----------------------------------------------------------------------------------
         \bibitem{1} \emph{International Conference on Computational Techniques, Electronics and Mechanical.} 2018. 
