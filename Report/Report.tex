@@ -367,12 +367,11 @@
 	
 		\subsection{K-Means}
 		
-		El paso inicial para utilizar el m\'etodo KMeans de sklearn es configurar el parámetro \textit{random\_state} el cual determina la generación de números aleatorios para la inicialización del centroide. De esta forma se puede asegurar que los resultados sean consistentes a trav\'es de múltiples ejecuciones. En dependencia de este valor podemos obtener distintos resultados a la hora de agrupar. Se hicieron pruebas para distintos valores de este par\'ametro, algunas de las cuales pueden ser encontradas en el directorio \textit{KMeans\_plots} del repositorio. Finalmente se decidi\'o tomar \textit{random\_seed = 45}.
+		El paso inicial para utilizar el m\'etodo KMeans de sklearn es configurar el parámetro \textit{random\_state} el cual determina la generación de números aleatorios para la inicialización del centroide. De esta forma se puede asegurar que los resultados sean consistentes a trav\'es de múltiples ejecuciones. En dependencia de este valor podemos obtener distintos resultados a la hora de agrupar. Se hicieron pruebas para distintos valores de este par\'ametro, algunas de las cuales pueden ser encontradas en el directorio \textit{KMeans\_plots} del repositorio. Finalmente se decidi\'o tomar \textit{random\_seed = 45}. \\
 		
-		Luego, se aplican los m\'etodos del codo y la silueta para un rango de cl\'usters determinado, teniendo en cuenta ambos para poder escoger el n\'umero k \'optimo de cl\'usters. Adem\'as se grafican los datos despu\'es de ser agrupados para los mejores k. Se pueden encontrar para cada valor de \textit{random\_seed} todas las gr\'aficas generadas por los m\'etodos anteriores tambi\'en en el directorio \textit{KMeans\_plots}.
-		 
+		Luego, se aplican los m\'etodos del codo y la silueta para un rango de cl\'usters determinado, teniendo en cuenta ambos para poder escoger el n\'umero k \'optimo de cl\'usters. Adem\'as se grafican los datos despu\'es de ser agrupados para los mejores k. Se pueden encontrar para cada valor de \textit{random\_seed} todas las gr\'aficas generadas por los m\'etodos anteriores tambi\'en en el directorio \textit{KMeans\_plots}. 
 		Finalmente, se toman los centroides de cada cl\'uster, 
-		se agrupan las caracter\'isticas correspondientes a cada dato seg\'un dichos cl\'usters, y se toma su promedio como representativo del grupo. 
+		se agrupan las caracter\'isticas correspondientes a cada dato seg\'un dichos cl\'usters, y se toma su promedio como representativo del grupo para realizar inferencias. 
 		
 		\subsubsection{Descubrir rasgos de caligraf\'ia a partir de rasgos de personalidad}
 		
