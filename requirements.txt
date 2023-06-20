@@ -1,0 +1,10 @@
+keras
+sklearn
+pandas
+prettytable
+bs4
+opencv-python-headless
+numpy
+os
+request
+matplotlib
