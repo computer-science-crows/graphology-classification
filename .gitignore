@@ -136,7 +136,7 @@ dmypy.json
 /Image_Matrix/Img_npy
 
 
-*.pdf 
+
 *.aux
 *.log
 *.fdb_latexmk
@@ -163,7 +163,6 @@ Report/Report.blg
 Report/Report.fdb_latexmk
 Report/Report.fdb_latexmk
 Report/Report.out
-Report/Report.pdf
 Report/Report.fdb_latexmk
 Report/Report.fdb_latexmk
 Report/Report.fdb_latexmk
