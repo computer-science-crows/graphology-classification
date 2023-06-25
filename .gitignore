@@ -177,3 +177,8 @@ Dataset/train.npy
 Dataset/test.npy
 Dataset/validation.npy
 Algorithms/dataset_feat.npy
+validation.npy
+.gitignore
+comp.txt
+train.npy
+test.npy
