@@ -560,7 +560,7 @@
         \begin{figure}[H]
             \centering
             \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
-                \cline{2-11}  \multicolumn{1}{c}{ }  & \multicolumn{2}{ |c| }{Neuroticism} & \multicolumn{2}{|c|}{Extrovrsion} & \multicolumn{2}{ |c| }{Exp. Openness} & \multicolumn{2}{ |c| }{Sympathy} & \multicolumn{2}{ |c| }{Morality} \\ 
+                \cline{2-11}  \multicolumn{1}{c}{ }  & \multicolumn{2}{ |c| }{Neuroticism} & \multicolumn{2}{|c|}{Extroversion} & \multicolumn{2}{ |c| }{Exp. Openness} & \multicolumn{2}{ |c| }{Sympathy} & \multicolumn{2}{ |c| }{Morality} \\ 
                 \cline{2-11}  \multicolumn{1}{c|}{ } & Media & SD & Media & SD & Media & SD & Media & SD  & Media & SD \\
                
                 \hline \multirow{2}{*}{SVM Poly} & 0.5547 & 0.0311 & 0.5823 & 0.0329 & 0.5800 & 0.0268 & 0.8573 & 0.0374 & 0.7124 & 0.0526 \\ 
@@ -703,7 +703,35 @@
     \end{figure}
 
     Todos los $p-values$ obtenidos son altos, por tanto para ninguna combinaci\'on de algoritmos se rechaza la hip\'otesis nula, quedndo 
-    que los $4$ son relativamente igual de buenos en la predicci\'on de la Moralidad.
+    que los $4$ son relativamente igual de buenos en la predicci\'on de la Moralidad.\\
+
+    En los casos en que la prueba de hip\'otesis \texttt{t-test} permiti\'o rechazar la hip\'otesis nula, encontr\'andose diferencias entre las medias de las evaluaciones de los algoritmos, el 
+    procesos de decisi\'on de cual de los algoritmos invlucrados era el mejor se bas\'o en analizar cu\'al tenia meyor media y menor varianza, o una varianza igual a las de los restantes algoritmos debido 
+    a que para cada uno de ellos se realiz\'o un test de Normalidad de \texttt{Shapiro-Wilks}, en el que para cada uno se obtivieron los sigientes $p-values$: 
+    
+    \begin{figure}[H]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|c|}
+            \cline{2-6}  \multicolumn{1}{c|}{ }  & Neuroticism & Extroversion & Exp. Openness & Sympathy & Morality \\ 
+            \hline SVM Poly & 0.4664 & 0.7526 & 0.9111 & 0.2827 & 0.1861 \\ 
+            \hline SVM Linear  & 0.6727 & 0.2556 & 0.7960 & 0.2051 & 0.3631\\
+            \hline SVM rbf & 0.8483 & 0.9970 & 0.5174 & 0.3412 & 0.0546 \\
+            \hline KNN & 0.6947 & 0.6277 & 0.4317 & 0.0554 & 0.1234 \\ 
+            \hline 
+           
+         \end{tabular}
+         \caption{Tablas de los p-value del test de normalidad para cada algoritmo en la predicci\'on de cada uno de los rasgos del BigFive}
+    \end{figure}
+
+    Como para el test de \texttt{Shapiro-Wilks} se tiene
+    
+    \begin{itemize}
+        \item [] $H_0$: Las muestras provienen de una distribuci\'on normal. 
+        \item [] $H_1$: No se cumple la normalidad en los datos.
+    \end{itemize}
+
+    Entonces con un nivel de confianza de un $95\%$, en ninguno de los algoritmos, para ninguna de las predicciones de rasgos del BigFive se puede rechazar la hip\'otesis nula, 
+    por lo que asumiendo el supuesto de Normalidad, quedan justificados las decisiones realizadas en la comparaci\'on de los algoritmos.
 
     \section{Conclusiones y trabajo futuro}
         En este trabajo se realiz\'o un estudio profundo de aprendizaje de m\'aquinas aplicado a Grafolog\'ia, desde la consulta al Estado del Arte, Construcci\'on y Taggeo de un Dataset, extracci\'on de Features de las im\'agenes, entrenamiento de algoritmos y an\'alisis de resultados. A modo general el flujo de trabajo queda representado en la siguiente imagen: 
