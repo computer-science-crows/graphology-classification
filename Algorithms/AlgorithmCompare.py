@@ -99,6 +99,9 @@ def evaluate_models(X,Y, models, Y10= None, Caracteristic = None):
     print("<===================================================>")
 
     for i in range(len(results)):
+        _ , p_valueNormal = stats.shapiro(results[i])
+        msg = "=====>>  Normality test for %s: p-value %f" % (names[i],p_valueNormal)
+        print(msg)
         for j in range(i+1,len(results)):
             statistic, p_value = stats.ttest_rel(results[i],results[j])
             msg = "%s <-> %s: statistic %f, p-value: %f" % (names[i], names[j], statistic, p_value)
