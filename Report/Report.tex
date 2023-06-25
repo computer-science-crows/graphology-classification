@@ -567,7 +567,7 @@
                 
                 \cline{2-11}   & 0.2819 & 0.0430 & 0.3107 & 0.0332 & 0.3464 & 0.0497 & 0.4223 & 0.0436 & 0.3199 & 0.0507 \\
                 \hline
-                \hline \multirow{2}{*}{SVM Linear} &             \textbf{0.5707} & \textbf{0.0313} & 0.5523 & 0.0244 & 0.5765 & 0.0314 & 0.8619 & 0.0332 & 0.7135 & 0.0480 \\
+                \hline \multirow{2}{*}{SVM Linear} &  0.5707 & 0.0313 & 0.5523 & 0.0244 & 0.5765 & 0.0314 & 0.8619 & 0.0332 & 0.7135 & 0.0480 \\
                 \cline{2-11} & 0.2658 & 0.0364 & 0.2946 & 0.0359 & 0.3556 & 0.0527 & 0.3866 & 0.0353 & 0.3176 & 0.0560 \\
                 \hline
                 \hline \multirow{2}{*}{SVM rbf} &  0.5558& 0.0310 &0.5845& 0.0314 &0.5811& 0.0282 &0.8607& 0.0329 &0.7077& 0.0522 \\
@@ -580,22 +580,22 @@
 
                
              \end{tabular}
+             \caption{Tabla de los algoritmos utilizados, para los valores de la media y desviaci\'on estandar del accuracy, para cada algoritmo se presentan las varientes 
+             de agrupar los datos en 2 categor\'ias(fila superior) y la de agruparlos en 12 ctegor\'ias(fila inferior) para cada uno de los 5 rasgos del BigFive }
         \end{figure}
 
         \begin{figure}[H]
             \centering
             \includegraphics[width = 0.7\textwidth]{boxplotNeuro.png}
             \includegraphics[width = 0.7\textwidth]{boxplotExtro.png}
-            
-            
-
+            \caption{Gr\'aficos de Caja y Bigotes de los resultados del 10-Kfold para los rasgos Neuroticismo y Extroversi\'on}
         \end{figure}
         \begin{figure}[H]
             \centering
             \includegraphics[width = 0.7\textwidth]{boxplotExp.png}
             \includegraphics[width = 0.7\textwidth]{boxplotSymp.png}
             \includegraphics[width = 0.7\textwidth]{boxplotMor.png}
-
+            \caption{Gr\'aficos de Caja y Bigotes de los resultados del 10-Kfold para los rasgos Apertura a experiencias, Simpat\'ia  y Moralidad}
         \end{figure}
    
     Con los valores de las medias, las varianzas y las gr\'aficas se puede determinar que 
@@ -625,8 +625,14 @@
             \hline KNN & 0.284 & 0.037 & 0.257 & - \\ 
             \hline
         \end{tabular}
+        \caption{p-values del t-test para los algoritmos en el rasgo Neuroticismo}
     \end{figure}
 
+    Tras la prueba de hip\'otesis, se tiene que para el SVM con kernel 
+    lineal, para todos los restantes algoritmos el $p-value$ es significativamente peque\~no con respecto a los restantes, 
+    aunque para un $\alpha = 0.05$ no se podr\'ia rechazar la hip\'otesis nula de su relaci\'on con los SVM de kernel polinomial y rbf, si se tomara un 
+    nivel de confianza ligeramente mayor si que se descartar\'ia, adem\'as comparando la media y la varianza, se tiene que es el que mayor media obtiene y la varianza 
+    es relativamente igual a la de los restantes algoritmos, as\'i que se puede afirmar que el algoritmo de SVM con kernel lineal es superior al resto para predecir el rasgo del Neuroticismo. 
     \begin{figure}[H]
         \centering
         \begin{tabular}{|c|c|c|c|c|}
@@ -637,8 +643,14 @@
             \hline KNN & 0.0107 & 0.2579 & 0.008 & - \\ 
             \hline
         \end{tabular}
+        \caption{p-values del t-test para los algoritmos en el rasgo Extroversi\'on}
     \end{figure}
 
+    Al realizar la prueba de hip\'otesis para el rasgo de Extroversi\'on se genera entre los algoritmos dos grupos, 
+    por un lado est\'an SVM de kernel rbf y polinomial y por otro en SVM de kernellineal y el KNN, entre los algoritmos de un mismo 
+    grupo con un nivel de confianza de un $95\%$ no es posible descartar la hip\'otesis nula, teniendose la opci\'on de igualdad de medias, mientras que 
+    en los algoritmos intragrupo la hip\'otesis nula se descarta y hay diferencias significativas entre ellos. Al analizar los valores de ls medias y las varianzas se 
+    puede concluir la superioridqad de los algoritmos SVM de kernel polinomial y rbf, siendo estos los mejores para predecir la extroversi\'on. 
 
     \begin{figure}[H]
         \centering
@@ -650,8 +662,12 @@
             \hline KNN & 0.000 & 0.000 & 0.000 & - \\ 
             \hline
         \end{tabular}
+        \caption{p-values del t-test para los algoritmos en el rasgo Apertura a experiencias}
     \end{figure}
 
+    Para la apertura a experiencias, rasgo en el que se pod\'ia comprobar con mayor facilidad la diferencia entre los SVM y el KNN, el test 
+    ratific\'o dicha conclusi\'on y adem\'as se obtiene que no se puede rechazar la hip\'otesis nula entre los tres tipos de kernels del SVM, 
+    siendo estos 3 algoritmos estadisticamente similares en la obtenci\'on de resultados para este rasgo del BigFive.
 
     \begin{figure}[H]
         \centering
@@ -663,7 +679,15 @@
             \hline KNN & 0.296 & 0.062 & 0.121 & - \\ 
             \hline
         \end{tabular}
+        \caption{p-values del t-test para los algoritmos en el rasgo Simpat\'ia}
     \end{figure}
+
+    Al analizar la tabla, se percibe que entre SVM de kernel lineal y el SVM de kernel polinomial, para 
+    un $\alpha = 0.05$ se puede descartar la hip\'otesis nula, de igual modo si fu\'eramos m\'as restrictivos con el nivel de confianza, 
+    se podr\'ia incluso determinar que entre el SVM de kernel lineal y el KNN existen diferencias, no as\'i entre los SVM linear y rbf, o entre 
+    el SVM plinomial y el KNN, en este rasgo en particular alanalizar los gr\'aficos vemos la presencia de outlayers en las cajas bigote del SVM linear y d
+    del rbf, que son los que influyen en que la varianza para los $4$ algoritmos sea similar; de modo que 
+    se puede determinar que son ligeramente superiores estos dos al predecir la Simpat\'ia.
 
     \begin{figure}[H]
         \centering
@@ -675,14 +699,18 @@
             \hline KNN & 0.308 & 0.177 & 0.830 & - \\ 
             \hline
         \end{tabular}
+        \caption{p-values del t-test para los algoritmos en el rasgo Moralidad}
     \end{figure}
+
+    Todos los $p-values$ obtenidos son altos, por tanto para ninguna combinaci\'on de algoritmos se rechaza la hip\'otesis nula, quedndo 
+    que los $4$ son relativamente igual de buenos en la predicci\'on de la Moralidad.
 
     \section{Conclusiones y trabajo futuro}
         En este trabajo se realiz\'o un estudio profundo de aprendizaje de m\'aquinas aplicado a Grafolog\'ia, desde la consulta al Estado del Arte, Construcci\'on y Taggeo de un Dataset, extracci\'on de Features de las im\'agenes, entrenamiento de algoritmos y an\'alisis de resultados. A modo general el flujo de trabajo queda representado en la siguiente imagen: 
 
         \begin{figure}[H]
             \centering
-            \includegraphics[width = 0.5\linewidth]{photo_2023-05-29_02-40-00.jpg}
+            \includegraphics[width = 0.4\linewidth]{photo_2023-05-29_02-40-00.jpg}
             \caption{Flujo del trabajo del Proyecto.}
         \end{figure}
 
