@@ -80,10 +80,10 @@ def SupportVectorMachine(X_train, X_test, y_train, y_test, kernel):
     X_train = scaler.fit_transform(X_train)
     X_test = scaler.transform(X_test)
 
-    accuracies = [0]*4 #Guardar accurracies para media
-    precision = [0]*4 
-    #Hacer 4-fold
-    kf = KFold(n_splits= 4)
+    accuracies = [0]*5 #Guardar accurracies para media
+    precision = [0]*5 
+    #Hacer 5-fold
+    kf = KFold(n_splits= 5)
     splitted = kf.split(X_train)
     i = 0
     for train, validate in splitted:

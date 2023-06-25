@@ -4,6 +4,8 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
+from Features.FeatureExtractor import FeaturesInfo
+from Dataset.create_dataset import data 
 
 # Load the handwriting images and extract the baseline, word slant, and word space features
 # and save them in X_train and y_train

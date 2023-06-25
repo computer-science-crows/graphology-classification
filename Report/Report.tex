@@ -3,9 +3,20 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{multicol}
+\usepackage{multirow}
+\usepackage{url}
 \usepackage[pdftex]{hyperref}
 \usepackage{float}
 \usepackage{hyperref} % For hyperlinks in the PDF
+\usepackage{vmargin}
+
+
+\topmargin=0.3in
+\evensidemargin=0.7in
+\oddsidemargin=0.7in
+\textwidth=6.5in
+\textheight=9.5in
+\headsep=0.35in
 
 \hypersetup{colorlinks,%
 	    citecolor=black,%
@@ -33,7 +44,7 @@
         La grafología es una técnica que estudia las características psicológicas de las personas a través de su escritura. 
         En algunos centros laborales se utilizan este tipo de análisis para determinar cuando contratar o no a alguien y se emplea también para analizar a criminales y en el proceso de determinar trastornos en personas. Esta es una tarea complicada realizada por expertos, psicólogos y grafólogos, y sus resultados están, numerosas veces, sujetos a la perspectiva de quien los analiza. 
         En este trabajo se propone utilizar algoritmos de Aprendizaje de Máquina, para automáticamente poder predecir características psicológicas de un individuo a partir de un fragmento de su escritura. 
-        Con este objetivo se propone la creaci\'on de una base de datos de im\'agenes de escritura a mano, as\'i como su uso para entrenar y comparar los modelos para predecir la personalidad basado en el Test de los Cinco Grandes (Big Five).
+        Con este objetivo se propone la creaci\'on de un dataset de im\'agenes de escritura a mano, as\'i como su uso para entrenar y comparar los modelos para predecir la personalidad basado en el Test de los Cinco Grandes (Big Five).
         Se implementaron los algoritmos Convolutional Neural Network (CNN), Support Vector Machine (SVM), K-Nearest Neighbours (KNN) y K-Means, estableciendo una comparaci\'on de los resultados obtenidos para el an\'alisis grafol\'ogico. 
     \end{abstract}
     
@@ -43,8 +54,9 @@
         No existe evidencia científica que respalde la efectividad de la grafología, por lo que es considerada una pseudociencia 
         y una práctica científicamente cuestionable.\\ 
 
-        Tal y como se menciona en el art\'iculo \cite{19} la grafolog\'ia no se utiliza para predecir el futuro o conocer el pasado de una persona. Su uso 
-        est\'a dado como una habilidad para conocer el estado psicol\'ogico de la persona en el momento que escribe, incluso se plantea que los resultados de este an\'alisis 
+
+        Tal y como se menciona en el art\'iculo \cite{vyawahare2022graphology} la grafolog\'ia no se utiliza para predecir el futuro o conocer el pasado de una persona. Su uso 
+        est\'a dado como una habilidad para conocer el estado psicol\'ogico de la persona en el momento que escribe, incluso se plantea que los resultado de este an\'alisis 
         puede depender de la edad de la persona o del momento en que redacta; es decir una misma persona puede tener resultados diferentes si se analiza su escritura en dos momentos 
         diferentes de su vida.\\
 
@@ -55,7 +67,7 @@
         Si el espacio que incluyes entre las letras es amplio, significa que aprecias tu libertad y que no te gusta sentirte abrumado o rodeado por mucha gente. 
         Si es angosto, no te agrada estar solo y prefieres vivir en compañía.\\
 
-        En el art\'iculo \cite{17} analizan los rasgos de escritura con el objetivo de crear perfiles para los asesinos, en este art\'iculo explican que 
+        En el art\'iculo \cite{mishra2017forensic} analizan los rasgos de escritura con el objetivo de crear perfiles para los asesinos, en este art\'iculo explican que 
         rasgos psicol\'ogicos se vinculan a: Espaciado de palabras, Espaciado de l\'ineas, M\'argenes, Inclinaci\'on, Presi\'on del l\'apiz, Forma de letras i, Forma de letras t, entre otras. \\ 
 
 
@@ -65,42 +77,43 @@
         La combinaci\'on de Aprendizaje M\'aquina y Grafolog\'ia es abordada en un amplio conjunto de art\'iculos en los que se prueban ideas diversas, e incluso se comparan los resultados obtenidos haciendo uso de
         diferentes t\'ecnicas y combin\'andolas.\\ 
 
-        En los art\'iculos \cite{1} y \cite{2} abordan ideas de preprocesado de las im\'agenes manuscritas haciendo uso del umbral adaptativo Gaussiano y llevando a binario los valores de los p\'ixeles de la im\'agen atendiendo a un
+
+        En los art\'iculos \cite{8769221} y \cite{CHITLANGIA2019384} abordan ideas de preprocesado de las im\'agenes manuscritas haciendo uso del unbral adaptativo Gaussiano y llevando a binario los valores de los p\'ixeles de la im\'agen atendiendo a un
         nivel de tolerancia prefijada.\\ 
 
-        Las Redes Neuronales Convolucionales (CNN) debido a su amplio uso para el trabajo con im\'agenes, en el art\'iculo \cite{1} se usan las CNN como m\'etodo propuesto en la arquitectura de una p\'agina web que permita determinar la personalidad 
-        a partir de la escritura. En otros como \cite{3} se emplea este m\'etodo en el an\'alisis de firmas, analizando la inclinaci\'on y el espaciado entre caracteres, con la limitaci\'on de que el dataset utilizado solamente posee 10 firmas de 6 individuos. \\ 
+        Las Redes Neuronales Convolucionales (CNN) debido a su amplio uso para el trabajo con im\'agenes, en el art\'iculo \cite{8769221} se usan las CNN como m\'etodo propuesto en la arquitectura de una p\'agina web que permita determinar la personalidad 
+        a partir de la escritura. En otros como \cite{8769221} se emplea este m\'etodo en el an\'alisis de firmas, analizando la inclinaci\'on y el espaciado entre caracteres, con la limitaci\'on de que el dataset utilizado solamente posee 10 firmas de 6 individuos. \\ 
 
-        De igual modo las CNN conjuntamente con Regresi\'on log\'istica se emplearon en \cite{4} para predecir el comportamiento financiero de una persona, en este caso con un dataset de más de 200 muestras de escrituras de un texto dado y resultados de un cuestionario de acuerdo al Big Five Personality Model.\\ 
+        De igual modo las CNN conjuntamente con Regresi\'on log\'istica se emplearon en \cite{THOMAS2020100315} para predecir el comportamiento financiero de una persona, en este caso con un dataset de más de 200 muestras de escrituras de un texto dado y resultados de un cuestionario de acuerdo al Big Five Personality Model.\\ 
 
-        Otro algoritmo utilizado para el an\'alisis grafol\'ogico es SVM, empleado en \cite{2}, \cite{5}, \cite{6}, \cite{7} y \cite{8}. En el caso de \cite{6} emplean el algoritmo sobre firmas de 53 participantes, para obtener un 71\% de efectividad, 
-        en otros como \cite{5} y \cite{8} se compara con otros algoritmos, en el primero con ANN y DNN y en el segundo con KNN y \'arboles de decisi\'on para predecir los resultados del Big Five, en este art\'iculo se utiliz\'o para el SVM un kernel RBF.\\ 
+        Otro algoritmo utilizado para el an\'alisis grafol\'ogico es SVM, empleado en \cite{CHITLANGIA2019384}, \cite{shete2019graphologist}, \cite{maliki2020personality}, \cite{hashemi2015graphology} y \cite{kurniawan2023framework}. En el caso de \cite{maliki2020personality} emplean el algoritmo sobre firmas de 53 participantes, para obtener un 71\% de efectividad, 
+        en otros como \cite{shete2019graphologist} y \cite{kurniawan2023framework} se compara con otros algoritmos, en el primero con ANN y DNN y en el segundo con KNN y \'arboles de decisi\'on para predecir los resultados del Big Five, en este art\'iculo se utiliz\'o para el SVM un kernel RBF.\\ 
 
-        Tambi\'en se utilizan: K-Means \cite{9}, Fuzy C-Means \cite{10}, ANN \cite{11,5,12,9}, Random Forest \cite{13, 14} y KNN \cite{14,9,8}.\\
+        Tambi\'en se utilizan: K-Means \cite{pathak2020personality}, Fuzy C-Means \cite{pratiwi2016personality}, ANN \cite{lokhande2017analysis,shete2019graphologist,champa2010artificial,pathak2020personality}, Random Forest \cite{likforman2017emothaw, ayzeren2019emotional} y KNN \cite{pathak2020personality,kurniawan2023framework}.\\
 
-        En el art\'iculo \cite{18} realizan un estado del arte sobre grafolog\'ia y Machine Learning en el cual comparan las investigaciones realizadas en 
+        En el art\'iculo \cite{remaida2020handwriting} realizan un estado del arte sobre grafolog\'ia y Machine Learning en el cual comparan las investigaciones realizadas en 
         otros art\'iculos respecto a los Features utilizados, las caracter\'isticas del dataset, algoritmo empleado y resultados obtenidos.
 
-    \section{Bases de Datos}
+    \section{Datasets}
 
-        Las bases de datos utilizadas en los estudios de grafolog\'ia realmente contienen informci\'on escasa. En muchos casos 
-        son privadas y para acceder a ellas es necesario pagar. En el art\'iculo \cite{14} muestran una tabla comparativa de los datasets disponibles en 
+        Los datasets utilizadas en los estudios de grafolog\'ia realmente contienen informci\'on escasa. En muchos casos 
+        son privadas y para acceder a ellas es necesario pagar. En el art\'iculo \cite{likforman2017emothaw} muestran una tabla comparativa de los datasets disponibles en 
         internet que se han utilizado en otros art\'iculos, en la misma describen cu\'ales son los tags presentes en cada uno de los datasets, si son p\'ublicos o no, en qu\'e atrt\'iculos se utilizan y 
         de que a\~no son. \\ 
 
         Al analizar este contenido resulta relevante que los tags que est\'an presentes en esos sets de datos son escasos, apenas ponen informaci\'on, como mano con la que escribe el sujeto, sexo, 
         ciudad en la que vive y poco m\'as. \\ 
 
-        Se descargaron los datasets de HandwritingDatabase \cite{15} y iam-handwriting-database \cite{16}, el primero conten\'ia un conjunto de im\'agenes de textos manuscritos e informaci\'on de cada persona como sexo, estado de EEUU donde naci\'o 
+        Se descargaron los datasets de HandwritingDatabase \cite{DataSet1} y iam-handwriting-database \cite{DataSet2}, el primero conten\'ia un conjunto de im\'agenes de textos manuscritos e informaci\'on de cada persona como sexo, estado de EEUU donde naci\'o 
         mano con la que escribe y edad, el segundo conten\'ia las im\'agenes de textos, las mismas segmentadas por l\'inea, por palabra y por caracteres y ten\'ia informci\'on general sobre los textos como 
         ancho de l\'inea, altura de l\'inea, cantidad de palabras por l\'inea, etc; pero ninguna informaci\'on sobre las personas. \\ 
 
-        Debido a la dificultad de descargar un dataset y la poca informaci\'on que ofrecen los datasets disponibles para el problema que deseamos resolver, se decidi\'o elaborar una base de datos propia.
+        Debido a la dificultad de descargar un dataset y la poca informaci\'on que ofrecen los datasets disponibles para el problema que deseamos resolver, se decidi\'o elaborar un dataset propia.
 
-    \section{Creaci\'on de la Base de Datos}
+    \section{Creaci\'on del dataset}
 
         La propuesta es crear nuestro propio dataset, para ello fueron encuestadas 71 personas, a las que se les pidi\'o que escribiesen un texto 
-        en espa\~nol y se les realiz\'o el test de personalidad BigFive \cite{23}. \\ 
+        en espa\~nol y se les realiz\'o el test de personalidad BigFive \cite{bigfivetest}. \\ 
 
         Las hojas manuscritas fueron escaneadas y a las im\'agenes se les aplic\'o un preprocesado para llevarlas escala de grises y finalmente a binario con un nivel de tolerancia de 180. Adem\'as se 
         realiz\'o una segmentaci\'on de los textos en l\'ineas a partir de una difusi\'on de los caracteres utilizando \texttt{opencv} de python. Las secciones de imagen que no quedaran 
@@ -116,11 +129,11 @@
         \subsection{Interlineado} 
 
             Para el interlineado se analizan dos clasificaciones posibles: Interlineado amplio (LINESPACE\_SEPARETED) e Interlineado peque\~no (LINESPACE\_CROWDED). Para encontrar el interlineado se utiliz\'o la t\'ecnica del perfil 
-            de proyeci\'on vertical suavizado(SPR) \cite{20}, esto permite separar las zonas de texto y espacios analizando los extremos del SPR, para las im\'agenes segmentadas es simple con este algoritmo determinar donde est\'a el texto correspondiente a la l\'inea y los espacios superior e inferior
-            correspondientes al interlineado, as\'i se puede determinar si una l\'inea est\'a muy unida a sus adyacentes considerando la proporci\'on de p\'ixeles de foreground (p\'ixeles negros correspondientes a texto) que existen en 
-            las regiones identificadas como espacio. \\
+            de proyeci\'on vertical suavizado(SPR) \cite{gavrilescu2018predicting}, esto permite separar las zonas de texto y espacios analizando los extremos del SPR, para las im\'agenes segmentadas es simple con este algoritmo determinar donde est\'a el texto correspondiente a la l\'inea y los espacios superior e inferior
+            correspondientes al interlineado, as\'i se puede determinar si una l\'inea est\'a muy unida a sus adyacentes considerando la proporci\'on de p\'ixeles de foreground (pixeles negros correspondientes a texto) que existen en 
+            las regiones identificadas como espacio.
 
-            Para analizar los SPR se separa la imagen en regiones verticales de tama\~no 5\% del ancho de la imagen. Luego, se hace el SPR de cada uno, se determinan las regiones de texto y espacio \cite{22} y se calcula la densidad 
+            Para analizar los SPR se separa la imagen en regiones verticales de tama\~no 5\% del ancho de la imagen. Luego, se hace el SPR de cada uno, se determinan las regiones de texto y espacio \cite{papavassiliou2010handwritten} y se calcula la densidad 
             de p\'ixeles de foreground en los espacios. Finalmente, se promedian los resultados de densidades para cada secci\'on vertical, para determinar si la l\'inea est\'a muy separada o muy pegada a sus adyacentes. 
 
             \begin{figure}[H]
@@ -128,9 +141,10 @@
                 \includegraphics[width = 0.5\linewidth]{Figure_1.png}
                 \caption{Segmento vertical de 5\% de imagen, en rojo el SPR y en azul los extremos del SPR, en el intermedio est\'a la zona de texto y en los bordes la zona de interlineado.}
             \end{figure}
+        
         \subsection{Margen} 
         
-            Para determinar el margen se pueden considerar tanto los m\'argenes superior e inferior como los m\'argenes laterales \cite{21}. Para nuestro Dataset, como las im\'agenes son l\'ineas manuscritas, no tiene sentido analizar los m\'argenes superior e inferior. Por tanto, solo 
+            Para determinar el margen se pueden considerar tanto los m\'argenes superior e inferior como los m\'argenes laterales \cite{joshi2019machine}. Para nuestro Dataset, como las im\'agenes son l\'ineas manuscritas, no tiene sentido analizar los m\'argenes superior e inferior. Por tanto, solo 
             se clasifica el margen lateral izquierdo en cuanto a su ancho como: Margen ancho (BIG\_MARGIN) y margen estrecho (SMALL\_MARGIN). Para esto se analiz\'o el perfil de proyeccci\'on (PR) horizontal de cada im\'agen tomando el rango del PR desde el elemento 0 hasta que el valor del PR 
             sea mayor que una tolerancia especificada; es decir, mientras que la densidad de p\'ixeles en el foreground para cada columna de la imagen sea menor que un valor relativo al largo de la imagen. 
 
@@ -139,7 +153,8 @@
                 \includegraphics[width = 0.5\linewidth]{Margin.png}
                 \caption{Desde el inicio hasta la l\'inea roja la secci\'on de margen.}
             \end{figure}
-        \subsection{Espaciado} 
+        
+            \subsection{Espaciado} 
 
             El espaciado, son los espacios dejados entre caracteres y palabras en una misma l\'inea. Para clasificar el espaciado se realiz\'o a cada imagen un trabajo con filtros morfol\'ogicos; seleccionando un kernel horizontal para realizar una convoluci\'on con la imagen 
             que permita unificar los trazos de todo lo que est\'e escrito unido de una misma palabra para de este modo separar las palabras enmarc\'andolas en recuadros. As\'i el espaciado se puede determinar como la distancia promedio entre los recuadros.
@@ -151,7 +166,7 @@
             \end{figure}
 
         \subsection{Inclinaci\'on de la L\'inea}
-            Para determinar la inclinaci\'on de la letra en una l\'inea se realiz\'o el procedimiento descrito en \cite{20}, rotando la im\'agen desde $-30^{\circ}$ hasta $30^{\circ}$. 
+            Para determinar la inclinaci\'on de la letra en una l\'inea se realiz\'o el procedimiento descrito en \cite{gavrilescu2018predicting}, rotando la im\'agen desde $-30^{\circ}$ hasta $30^{\circ}$. 
             Determinando para cu\'al de los valores de la rotaci\'on la cantidad de p\'ixeles de foreground es m\'axima para la zona central de la imagen. Para los \'angulos comprendidos 
             entre $ [-30; -5) $ se dice que la linea base es Ascendente (ASCENDING), entre $[-5; 5]$ es Nivelada (LEVELED) y entre $(5; 30]$ es Descendente (DESCENDING). 
 
@@ -167,7 +182,7 @@
             Para la inclinaci\'on de la letra se tienen 5 posibles clasificaciones: Inclinado extremadamente a la izquierda (EXTREME\_LEFT), ligeramente inclinado a la 
             izquierda (MODERATE\_LEFT), as\'i como sus equivalentes hacia la derecha (EXTREME\_RIGHT) y (MODERATE\_RIGHT) respectivamente y la escritura sin inclinaciones (VERTICAL). 
             Para extraer este feature se utiliza el perfil de proyecci\'on (PR) vertical rotando la imagen en \'angulos entre $-20^{\circ}$ y $20^{\circ}$, buscando el \'angulo que maximice
-            la suma del PR normalizado, tal y como se plantea en \cite{20}.
+            la suma del PR normalizado, tal y como se plantea en \cite{gavrilescu2018predicting}.
 
     \section{Algoritmos Utilizados}
         Para la investigsci\'on sobre Grafolog\'ia con aprendizaje de m\'aquinas se utilizaron a modo comparativo los algoritmos m\'as citados en el Estado del Arte de este tema. 
@@ -204,16 +219,20 @@
                 En la evaluaci\'on del KNN se tuvieron en cuenta las m\'etricas de \texttt{acurracy} y \texttt{precision}. Para cada uno de los rasgos por separado se
                 obtuvo en la etapa de entrenamiento/test los sigientes valores promedio para esas m\'etricas luego de utilizar un 5-Fold: \\
 
-                \begin{tabular}[H]{|c|c|c|}
+                \begin{figure}[H]
+                    \centering
+                    \begin{tabular}{|c|c|c|}
 
-                    \hline Categor\'ia & Accuracy promedio & Precisi\'on promedio \\  
-                    \hline Neuroticismo & 0.543033653236376 & 0.43342082642200563 \\
-                    \hline Extroversio\'n& 0.5431921954931721 & 0.5473437650759438 \\
-                    \hline Apertura a Experiencias & 0.41551811609520994 & 0.43320995174546806 \\
-                    \hline Simpat\'ia& 0.8458440789751829 & 0.42945218290696635 \\
-                    \hline Moralidad & 0.7041812877859046 & 0.5274896102039315 \\
-                    \hline
-                \end{tabular}
+                        \hline Categor\'ia & Accuracy promedio & Precisi\'on promedio \\  
+                        \hline Neuroticismo & 0.5430 & 0.4334 \\
+                        \hline Extroversio\'n& 0.5432& 0.5473 \\
+                        \hline Apertura a Experiencias & 0.4155 & 0.4332 \\
+                        \hline Simpat\'ia& 0.8458 & 0.4295 \\
+                        \hline Moralidad & 0.7042 & 0.5275 \\
+                        \hline
+                    \end{tabular}
+                \end{figure}
+                
 
                 \begin{figure}[H]
                     \centering
@@ -222,15 +241,18 @@
 
                 Posteriormente en la etapa de validaci\'on los resultados que se obtienen para \texttt{acurracy} y \texttt{precision} de cada rasgo son: 
 
-                \begin{tabular}[H]{|c|c|c|}
-                    \hline Categor\'ia & Accuracy & Precisi\'on \\  
-                    \hline Neuroticismo             & 0.910828025477707  & 0.4798657718120805 \\
-                    \hline Extroversio\'n           & 0.4681528662420382 & 0.37875375375375375 \\
-                    \hline Apertura a Experiencias  & 0.2611464968152866 & 0.5211134453781512 \\
-                    \hline Simpat\'ia               & 0.8885350318471338 & 0.45737704918032784 \\
-                    \hline Moralidad                & 0.9140127388535032 & 0.46141479099678456 \\
-                    \hline
-                \end{tabular}
+                \begin{figure}[H]
+                    \centering
+                    \begin{tabular}{|c|c|c|}
+                        \hline Categor\'ia & Accuracy & Precisi\'on \\  
+                        \hline Neuroticismo             & 0.9108 & 0.4799 \\
+                        \hline Extroversio\'n           & 0.4682 & 0.3788 \\
+                        \hline Apertura a Experiencias  & 0.2611 & 0.5211 \\
+                        \hline Simpat\'ia               & 0.8885 & 0.4574 \\
+                        \hline Moralidad                & 0.9140 & 0.4614 \\
+                        \hline
+                    \end{tabular}
+                \end{figure}
             
                 \begin{figure}[H]
                     \centering
@@ -294,16 +316,19 @@
             Todas por debajo del 50\%, para estos modelos en la etapa de validaci\'on se obtuvieron los 
             siguientes valores de \texttt{accuracy} y las siguientes gr\'aficas para cada kernel. \\ 
 
-            \begin{tabular}[H]{|c|c|c|c|}
+            \begin{figure}[H]
+                \centering
+                \begin{tabular}{|c|c|c|c|}
 
-                \hline Categor\'ia & Accur (Lineal) & Accur (Polinomial) & Accur (RBF) \\  
-                \hline Neuroticismo             & 0.0796 & 0.1401  &  0.1433\\
-                \hline Extroversio\'n           & 0.2006 & 0.2101  &  0.2133\\
-                \hline Apertura a Exp  & 0.1910 & 0.1942  &  0.1942\\
-                \hline Simpat\'ia               & 0.3598 & 0.5350  &  0.4968\\
-                \hline Moralidad                & 0.4140 & 0.3789  &  0.3789\\
-                \hline
-            \end{tabular}
+                    \hline Categor\'ia & Accur (Lineal) & Accur (Polinomial) & Accur (RBF) \\  
+                    \hline Neuroticismo             & 0.0796 & 0.1401  &  0.1433\\
+                    \hline Extroversio\'n           & 0.2006 & 0.2101  &  0.2133\\
+                    \hline Apertura a Exp  & 0.1910 & 0.1942  &  0.1942\\
+                    \hline Simpat\'ia               & 0.3598 & 0.5350  &  0.4968\\
+                    \hline Moralidad                & 0.4140 & 0.3789  &  0.3789\\
+                    \hline
+                \end{tabular}
+            \end{figure}
 
             \begin{figure}[H]
                 \centering
@@ -326,17 +351,22 @@
             \end{figure}
 
             En la etapa de validaci\'on se obtuvieron los siguientes valores de \texttt{accuracy}: \\ 
+            
 
-            \begin{tabular}[H]{|c|c|c|c|}
+            \begin{figure}[H]
+                \centering
+                \begin{tabular}{|c|c|c|c|}
 
-                \hline Categor\'ia & Accur (Lineal) & Accur (Polinomial) & Accur (RBF) \\  
-                \hline Neuroticismo             & 0.9617 & 0.9171  &  0.9171\\
-                \hline Extroversio\'n           & 0.4936 & 0.4681  &  0.4490\\
-                \hline Apertura a Exp           & 0.8152 & 0.7898  &  0.7993\\
-                \hline Simpat\'ia               & 0.9171 & 0.9171  &  0.9108\\
-                \hline Moralidad                & 0.9171 & 0.8885  &  0.9171\\
-                \hline
-            \end{tabular}
+                    \hline Categor\'ia & Accur (Lineal) & Accur (Polinomial) & Accur (RBF) \\  
+                    \hline Neuroticismo             & 0.9617 & 0.9171  &  0.9171\\
+                    \hline Extroversio\'n           & 0.4936 & 0.4681  &  0.4490\\
+                    \hline Apertura a Exp           & 0.8152 & 0.7898  &  0.7993\\
+                    \hline Simpat\'ia               & 0.9171 & 0.9171  &  0.9108\\
+                    \hline Moralidad                & 0.9171 & 0.8885  &  0.9171\\
+                    \hline
+                \end{tabular}
+            \end{figure}
+            
 
           
             \begin{figure}[H]
@@ -519,12 +549,134 @@
     \caption{Tabla con los resultados al aplicar clustering para k=7. Se muestran las puntuaciones promedio de los datos referentes a los features y el big five en cada cl\'uster de la forma (Inclinaci\'on de la Letra. Inclinaci\'on de la L\'inea. Espaciado. Interlineado. Margen.) y (Neuroticismo. Extroversi\'on. Apertura a Experiencias. Simpat\'ia. Moralidad.) respectivamente.}
     \end{figure}
     
-    
+    \section{Comparaci\'on de los algoritmos}
+        Para comparar, entre los enfoques utilizados en la investigaci\'on, cu\'ales obtuvieron mejores resultados y por tanto permiten predecir mejor alguno de los rasgos
+        del BigFive, o si con m\'as de uno se obtienen resultados similares; se realiza para ello un an\'alisis estad\'istico utilizando el 10-cross-fold-validation, es decir a cada algoritmo se 
+        le mide su rendimiento an diferentes datasets (10 creados por el 10-kfold) configurados con la misma semilla para mantener la uniformidad en el testeo. Con esto 
+        obtenemos para cada algoritmo, para cada caracter\'istica del BigFive las siguientes relaciones de \textbf{media} y \textbf{varianza} para la medida de accuracy, 
+        as\'i como los gr\'aficos de caja y bigotes para una comparaci\'on gr\'afica de los valores. 
+
+
+        \begin{figure}[H]
+            \centering
+            \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+                \cline{2-11}  \multicolumn{1}{c}{ }  & \multicolumn{2}{ |c| }{Neuroticism} & \multicolumn{2}{|c|}{Extrovrsion} & \multicolumn{2}{ |c| }{Exp. Openness} & \multicolumn{2}{ |c| }{Sympathy} & \multicolumn{2}{ |c| }{Morality} \\ 
+                \cline{2-11}  \multicolumn{1}{c|}{ } & Media & SD & Media & SD & Media & SD & Media & SD  & Media & SD \\
+               
+                \hline \multirow{2}{*}{SVM Poly} & 0.5547 & 0.0311 & 0.5823 & 0.0329 & 0.5800 & 0.0268 & 0.8573 & 0.0374 & 0.7124 & 0.0526 \\ 
+                
+                \cline{2-11}   & 0.2819 & 0.0430 & 0.3107 & 0.0332 & 0.3464 & 0.0497 & 0.4223 & 0.0436 & 0.3199 & 0.0507 \\
+                \hline
+                \hline \multirow{2}{*}{SVM Linear} &             \textbf{0.5707} & \textbf{0.0313} & 0.5523 & 0.0244 & 0.5765 & 0.0314 & 0.8619 & 0.0332 & 0.7135 & 0.0480 \\
+                \cline{2-11} & 0.2658 & 0.0364 & 0.2946 & 0.0359 & 0.3556 & 0.0527 & 0.3866 & 0.0353 & 0.3176 & 0.0560 \\
+                \hline
+                \hline \multirow{2}{*}{SVM rbf} &  0.5558& 0.0310 &0.5845& 0.0314 &0.5811& 0.0282 &0.8607& 0.0329 &0.7077& 0.0522 \\
+                \cline{2-11} &  0.2750& 0.0430 &0.3084& 0.0319 &0.3544& 0.0428 &0.4269& 0.0426 &0.3187& 0.0506 \\ 
+                \hline
+                \hline \multirow{2}{*}{KNN} &   0.5466& 0.0440&0.5638& 0.0383&0.4246& 0.0244&0.8504& 0.0339&0.7077& 0.0509 \\ 
+                \cline{2-11} & 0.0448& 0.0096 &0.2900& 0.0415 &0.3130& 0.0300 &0.4039& 0.0328 &0.2865& 0.0586\\ 
+                \hline 
+              
+
+               
+             \end{tabular}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width = 0.7\textwidth]{boxplotNeuro.png}
+            \includegraphics[width = 0.7\textwidth]{boxplotExtro.png}
+            
+            
+
+        \end{figure}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width = 0.7\textwidth]{boxplotExp.png}
+            \includegraphics[width = 0.7\textwidth]{boxplotSymp.png}
+            \includegraphics[width = 0.7\textwidth]{boxplotMor.png}
+
+        \end{figure}
    
-    
-   
-   
-    
+    Con los valores de las medias, las varianzas y las gr\'aficas se puede determinar que 
+    con gran diferencia los modelos para todas las caracter\'isticas tienen un mejor desempe\~no cuando los
+    datos est\'an separados en dos categor\'ias. No obstante, entre los algoritmos de KNN respecto a SVM, en algunas de 
+    las caracter\'isticas del BigFive como la Apertura a experiencias, se puede comprobar que SVW obtiene un 
+    mejor resultado, mientras en las restantes queda la incertidumbre de si realmente es mejor utilizar algun k\'ernel en espec\'ifico para el SVM, o si es mejor usar el KNN. 
+    Precisamente para determinar si existen diferencias significativas entre estos algoritmos se les aplic\'o un test estad\'istico, 
+    el \texttt{t-test} que permite validar si las diferencias entre las m\'etricas son o no estadisticamnete significativas. 
+
+    Esta prueba de hip\'otesis se encuentra en \texttt{Python} en el m\'odulo \texttt{scypy.stats}, tiene las siguientes hip\'otesis nulas y alternativa: 
+
+    \begin{itemize}
+        \item [] $H_0$: No existe diferencia significativa, las medias de las evaluaciones son iguales. 
+        \item [] $H_1$: Las medias de los valores son diferentes.
+    \end{itemize}
+
+    Al realizar estas pruebas para cada rasgo del BigFive, se obtuvieron los siguientes valores para el $p-value$.
+
+    \begin{figure}[H]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|}
+            \cline{2-5} \multicolumn{1}{c|}{ }& SVM-poly& SVM-linear & SVM-rbf & KNN \\ 
+            \hline SVM-poly & - & 0.066 &  0.588 & 0.284 \\ 
+            \hline SVM-linear & 0.066 & - & 0.070 & 0.037 \\ 
+            \hline SVM-rbf & 0.588 & 0.070 & - & 0.257 \\ 
+            \hline KNN & 0.284 & 0.037 & 0.257 & - \\ 
+            \hline
+        \end{tabular}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|}
+            \cline{2-5} \multicolumn{1}{c|}{ }& SVM-poly& SVM-linear & SVM-rbf & KNN \\ 
+            \hline SVM-poly & - & 0.0005 &  0.3434 & 0.0107 \\ 
+            \hline SVM-linear & 0.0005 & - & 0.0002 & 0.2579 \\ 
+            \hline SVM-rbf &0.3434 & 0.0002 & - & 0.008 \\ 
+            \hline KNN & 0.0107 & 0.2579 & 0.008 & - \\ 
+            \hline
+        \end{tabular}
+    \end{figure}
+
+
+    \begin{figure}[H]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|}
+            \cline{2-5} \multicolumn{1}{c|}{ }& SVM-poly& SVM-linear & SVM-rbf & KNN \\ 
+            \hline SVM-poly & - & 0.557 &  0.726 & 0.000 \\ 
+            \hline SVM-linear & 0.557 & - & 0.420 & 0.000 \\ 
+            \hline SVM-rbf &0.726 & 0.420 & - & 0.000 \\ 
+            \hline KNN & 0.000 & 0.000 & 0.000 & - \\ 
+            \hline
+        \end{tabular}
+    \end{figure}
+
+
+    \begin{figure}[H]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|}
+            \cline{2-5} \multicolumn{1}{c|}{ }& SVM-poly& SVM-linear & SVM-rbf & KNN \\ 
+            \hline SVM-poly & - & 0.036 &   0.193 & 0.296 \\ 
+            \hline SVM-linear & 0.036 & - & 0.343 & 0.062 \\ 
+            \hline SVM-rbf & 0.193 & 0.343 & - & 0.121 \\ 
+            \hline KNN & 0.296 & 0.062 & 0.121 & - \\ 
+            \hline
+        \end{tabular}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|}
+            \cline{2-5} \multicolumn{1}{c|}{ }& SVM-poly& SVM-linear & SVM-rbf & KNN \\ 
+            \hline SVM-poly & - & 0.783 &   0.167 & 0.308 \\ 
+            \hline SVM-linear & 0.783 & - &0.177 & 0.177 \\ 
+            \hline SVM-rbf & 0.167 & 0.177 & - & 0.830 \\ 
+            \hline KNN & 0.308 & 0.177 & 0.830 & - \\ 
+            \hline
+        \end{tabular}
+    \end{figure}
+
     \section{Conclusiones y trabajo futuro}
         En este trabajo se realiz\'o un estudio profundo de aprendizaje de m\'aquinas aplicado a Grafolog\'ia, desde la consulta al Estado del Arte, Construcci\'on y Taggeo de un Dataset, extracci\'on de Features de las im\'agenes, entrenamiento de algoritmos y an\'alisis de resultados. A modo general el flujo de trabajo queda representado en la siguiente imagen: 
 
@@ -534,66 +686,21 @@
             \caption{Flujo del trabajo del Proyecto.}
         \end{figure}
 
-        Con los algoritmos empleados pudimos concluir que realmente la grafolog\'ia no puede determinar de 
-        forma certera la psicolog\'ia de una persona. Los modelos utilizados rondan el 50\% de efectividad en sus predicciones, lo cual dista de ser una clasificaci\'on fiable. De los modelos utilizados el SVM con clasificaciones en alto y bajo es el que mejores 
-        resultados ofreci\'o, en su mayor\'ia sobre el 80\% - 90\% de fiabilidad, pero igual distante en identificar caracter\'isticas como la extroversi\'on.\\ 
 
-        Se propone como idea de investigaci\'on futura la construcci\'on de un dataset de mayores dimensiones para probar estas y otras ideas de aprendizaje de m\'aquinas sobre grafolog\'ia, que permitan que los modelos no hagan overfit por la escas\'es de datos respecto al amplio n\'umero de categor\'ias para clasificar. 
-		
-		\section{Repositorio del proyecto}
+        Con los algoritmos empleados pudimos determinar que realmente la grafolog\'ia no puede determinar de 
+        forma certera la psicolog\'ia de una persona. Los modelos utilizados rondan el 50\% de efectividad en sus predicciones, 
+        lo cual dista de ser una clasificaci\'on fiable. De los modelos utilizados el SVM con clasificaciones en alto y bajo es el que mejores 
+        resultados ofreci\'o, en su mayor\'ia sobre el 80\% - 90\% de fiabilidad, pero igual de distante en identificar caracter\'isticas como la extroversi\'on.\\ 
+
+        Se propone como idea de investigaci\'on futura la construcci\'on de un dataset de mayores dimensiones para probar estas y otras ideas de ML sobre grafolog\'ia, que 
+        permitan que los modelos no hagan overfit por la escac\'es de datos respecto al amplio n\'umero de categor\'ias para clasificar. 
+
+        \section{Repositorio del proyecto}
 		\begin{center}
 			\small \url{https://github.com/computer-science-crows/graphology-classification}
 		\end{center}
-		
-		\normalsize
-		
-\begin{thebibliography}{99}
-    %-----------------------------------------------------------------------------------
-        \bibitem{1} \emph{International Conference on Computational Techniques, Electronics and Mechanical.} 2018. 
-    
-        \bibitem{2} \emph{Handwriting Analysis based on Histogram of Oriented Gradient for Predicting Personality traits using SVM.} Procedia Computer Science, vol. 165, 2019.
-    
-        \bibitem{3} \emph{Personality Prediction based on Handwriting using Machine Learning.}
-        
-        \bibitem{4} \emph{A framework for analyzing financial behavior using machine learning classification of personality through handwriting analysis.}
-    
-        \bibitem{5} \emph{E-Graphologist for Personality Profile.}
 
-        \bibitem{6}  \emph{Personality Prediction System Based on Signatures}
-        
-        \bibitem{7}  \emph{Graphology for Farsi Handwriting Using Image Processing Techniques    }
-        
-        \bibitem{8}  \emph{A Framework for Determining the Big Five Personality Traits Using Machine Learning Classification through Graphology}
-        
-        \bibitem{9}  \emph{Personality analysis through handwriting recognition}
-        
-        \bibitem{10} \emph{Personality Type Assessment System by using  Enneagram-Graphology Techniques on Digital  Handwriting}
-        
-        \bibitem{11} \emph{Analysis of Signature for the Prediction of Personality\_Traits}
-        
-        \bibitem{12} \emph{Artificial Neural Network for Human Behavior Prediction  through Handwriting Analysis}
-        
-        \bibitem{13} \emph{EMOTHAW\_A\_novel\_database\_for\_emotional\_state\_recog}
-        
-        \bibitem{14} \emph{IEEE Xplore Full-Text PDF}
-        
-        \bibitem{15} \url{https://data.csafe.iastate.edu/DataPortal/#HandwritingDatabase} 
-        
-        \bibitem{16} \url{https://fki.tic.heia-fr.ch/databases/iam-handwriting-database} 
+        \bibliographystyle{plainurl}
+        \bibliography{bibliography}
 
-        \bibitem{17} \emph{Forensic Graphology Assessment of Personality}
-
-        \bibitem{18} \emph{Handwriting Personality Recognition with Machine  Learning: A Comparative Study}
-
-        \bibitem{19} \emph{GRAPHOLOGY: UNDERSTANDING – MISUNDERSTANDING.}
-
-        \bibitem{20} \emph{Predicting the Big Five personality traits from handwriting } 2018
-
-        \bibitem{21} \emph{A Machine Learning Approach to Employability Evaluation Using Handwriting Analysis}
-
-        \bibitem{22} \emph{Handwritten document image segmentation into text lines and words} 2010
-        
-        \bibitem{23} \url{https://bigfive-test.com}
-        %-----------------------------------------------------------------------------------
-    \end{thebibliography}
 \end{document}
